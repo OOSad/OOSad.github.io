@@ -1,0 +1,24 @@
+.parent
+{
+    display: flex;
+    height: 300px;
+}
+
+.child 
+{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.FlexContainer
+{
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around;
+    align-items: center;
+}

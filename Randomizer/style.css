@@ -1,0 +1,16 @@
+#flex
+{
+    display: flex;
+}
+
+.container
+{
+    background-color: white;
+}
+
+.box
+{
+    background-color: gray;
+    height: 100;
+    width: 100;
+}

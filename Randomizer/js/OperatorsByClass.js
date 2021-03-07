@@ -4,8 +4,14 @@ var rollATeamButton = document.getElementById("RollATeamButton");
 
 rollATeamButton.onclick = function()
 {
+    console.clear();
+    
     for (var i = 0; i < 12; i++)
     {
-        console.log(guardOperators[i]);
+        console.log(guardOperators[getRandomNumber(0, guardOperators.length)]);
     }
 }
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }

@@ -22,7 +22,14 @@ rollATeamButton.onclick = function()
 {
     console.clear();
     
-    console.log(FetchAllOperatorLabelsOnPage());
+    var rolledPoolOfOperators = [];
+    
+    for (var i = 0; i < 11; i++)
+    {
+        rolledPoolOfOperators.push(GetRandomOperatorFromCompletePool());
+    }
+
+    console.log(rolledPoolOfOperators);
 }
 
 function GetRandomNumber(min, max) 
@@ -34,4 +41,9 @@ function FetchAllOperatorLabelsOnPage()
 {
     var operatorLabels = document.getElementsByClassName("OperatorLabel");
     return operatorLabels;
+}
+
+function GetRandomOperatorFromCompletePool()
+{
+    return completePoolOfOperators[GetRandomNumber(0, completePoolOfOperators.length)];
 }

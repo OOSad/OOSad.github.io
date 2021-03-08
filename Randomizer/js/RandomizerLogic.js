@@ -22,6 +22,13 @@ var rollATeamButton = document.getElementById("RollATeamButton");
 rollATeamButton.onclick = function()
 {
     console.clear();
+
+    rolledPoolOfOperators = ResetList();
+
+    for (var i = 0; i < 11; i++)
+    {
+        console.log(rolledPoolOfOperators[i]);
+    }
     
     for (var i = 0; i < 11; i++)
     {
@@ -31,9 +38,21 @@ rollATeamButton.onclick = function()
     UpdateOperatorLabelsOnPage();
 }
 
+
+function ResetList()
+{
+    var listToClearOut = [];
+    return listToClearOut;
+}
+
 function GetRandomNumber(min, max) 
 {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function GetRandomOperatorFromCompletePool()
+{
+    return completePoolOfOperators[GetRandomNumber(0, completePoolOfOperators.length)];
 }
 
 function FetchAllOperatorLabelsOnPage()
@@ -52,7 +71,3 @@ function UpdateOperatorLabelsOnPage()
     }
 }
 
-function GetRandomOperatorFromCompletePool()
-{
-    return completePoolOfOperators[GetRandomNumber(0, completePoolOfOperators.length)];
-}

@@ -22,12 +22,16 @@ rollATeamButton.onclick = function()
 {
     console.clear();
     
-    for (var i = 0; i < 12; i++)
-    {
-        console.log(completePoolOfOperators[getRandomNumber(0, completePoolOfOperators.length)]);
-    }
+    console.log(FetchAllOperatorLabelsOnPage());
 }
 
-function getRandomNumber(min, max) {
+function GetRandomNumber(min, max) 
+{
     return Math.floor(Math.random() * (max - min + 1) ) + min;
-  }
+}
+
+function FetchAllOperatorLabelsOnPage()
+{
+    var operatorLabels = document.getElementsByClassName("OperatorLabel");
+    return operatorLabels;
+}

@@ -22,6 +22,12 @@ var rollATeamButton = document.getElementById("RollATeamButton");
 rollATeamButton.onclick = function()
 {
     console.clear();
+    
+    for (var i = 0; i < completePoolOfOperators.length; i++)
+    {
+        CreateOperatorCheckbox();
+    }
+    
 
     rolledPoolOfOperators = ResetList();
 
@@ -69,5 +75,13 @@ function UpdateOperatorLabelsOnPage()
     {
         operatorLabels[i].textContent = rolledPoolOfOperators[i];
     }
+}
+
+function CreateOperatorCheckbox()
+{
+    var checkboxesDiv = document.getElementById("checkboxes");
+    var x = document.createElement("INPUT");
+    x.setAttribute("type", "checkbox");
+    checkboxesDiv.appendChild(x);
 }
 

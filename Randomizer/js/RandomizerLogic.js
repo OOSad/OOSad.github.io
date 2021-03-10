@@ -19,14 +19,16 @@ var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", 
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
 
+for (var i = 0; i < completePoolOfOperators.length; i++)
+    {
+        CreateOperatorCheckbox(completePoolOfOperators[i]);
+    }
+
 rollATeamButton.onclick = function()
 {
     console.clear();
     
-    for (var i = 0; i < completePoolOfOperators.length; i++)
-    {
-        CreateOperatorCheckbox();
-    }
+    
     
 
     rolledPoolOfOperators = ResetList();
@@ -77,11 +79,16 @@ function UpdateOperatorLabelsOnPage()
     }
 }
 
-function CreateOperatorCheckbox()
+function CreateOperatorCheckbox(operatorName)
 {
     var checkboxesDiv = document.getElementById("checkboxes");
-    var x = document.createElement("INPUT");
-    x.setAttribute("type", "checkbox");
-    checkboxesDiv.appendChild(x);
+    var checkbox = document.createElement("INPUT");
+    var checkboxLabel = document.createElement("LABEL");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.value = operatorName;
+    checkboxLabel.textContent = operatorName;
+    checkboxesDiv.appendChild(checkboxLabel);
+    checkboxesDiv.appendChild(checkbox);
+    
 }
 

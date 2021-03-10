@@ -20,9 +20,11 @@ var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
 
 for (var i = 0; i < completePoolOfOperators.length; i++)
-    {
-        CreateOperatorCheckbox(completePoolOfOperators[i]);
-    }
+{
+    CreateOperatorCheckbox(completePoolOfOperators[i]);
+    CreateOperatorCheckboxLabel(completePoolOfOperators[i]);
+}
+
 
 rollATeamButton.onclick = function()
 {
@@ -83,12 +85,20 @@ function CreateOperatorCheckbox(operatorName)
 {
     var checkboxesDiv = document.getElementById("checkboxes");
     var checkbox = document.createElement("INPUT");
-    var checkboxLabel = document.createElement("LABEL");
     checkbox.setAttribute("type", "checkbox");
     checkbox.value = operatorName;
-    checkboxLabel.textContent = operatorName;
-    checkboxesDiv.appendChild(checkboxLabel);
     checkboxesDiv.appendChild(checkbox);
+
+    
+    
     
 }
 
+function CreateOperatorCheckboxLabel(operatorName)
+{
+    var checkboxesDiv = document.getElementById("checkboxes");
+    var checkboxLabel = document.createElement("LABEL");
+    checkboxLabel.textContent = operatorName;
+    checkboxesDiv.appendChild(checkboxLabel);
+
+}

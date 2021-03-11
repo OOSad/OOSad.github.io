@@ -118,6 +118,6 @@ function AddCheckedOperatorsToArray(callerCheckbox)
 
 function WriteUserOperatorsArrayToFile(userOperators)
 {
-    localStorage.setItem("UserOps", "userOperators");
+    localStorage.setItem("UserOps", userOperators);
     console.log(localStorage.getItem("UserOps"));
 }

@@ -88,7 +88,7 @@ function CreateOperatorCheckbox(operatorName)
     var checkboxesDiv = document.getElementById("checkboxes");
     var checkbox = document.createElement("INPUT");
     checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("onchange", "WriteCheckedOperatorsToFile(this)");
+    checkbox.setAttribute("onchange", "AddCheckedOperatorsToArray(this)");
     checkbox.value = operatorName;
     checkboxesDiv.appendChild(checkbox);
 }
@@ -101,7 +101,7 @@ function CreateOperatorCheckboxLabel(operatorName)
     checkboxesDiv.appendChild(checkboxLabel);
 }
 
-function WriteCheckedOperatorsToFile(callerCheckbox)
+function AddCheckedOperatorsToArray(callerCheckbox)
 {
     if (callerCheckbox.checked)
     {
@@ -113,5 +113,11 @@ function WriteCheckedOperatorsToFile(callerCheckbox)
         userPoolOfOperators.splice(userPoolOfOperators.indexOf(callerCheckbox.value), 1);
     }
 
-    console.log(userPoolOfOperators);
+    WriteUserOperatorsArrayToFile(userPoolOfOperators);
+}
+
+function WriteUserOperatorsArrayToFile(userOperators)
+{
+    localStorage.setItem("UserOps", "userOperators");
+    console.log(localStorage.getItem("UserOps"));
 }

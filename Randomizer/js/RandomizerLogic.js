@@ -86,12 +86,9 @@ function CreateOperatorCheckbox(operatorName)
     var checkboxesDiv = document.getElementById("checkboxes");
     var checkbox = document.createElement("INPUT");
     checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("onchange", "WriteCheckedOperatorsToFile(this)");
     checkbox.value = operatorName;
     checkboxesDiv.appendChild(checkbox);
-
-    
-    
-    
 }
 
 function CreateOperatorCheckboxLabel(operatorName)
@@ -100,5 +97,9 @@ function CreateOperatorCheckboxLabel(operatorName)
     var checkboxLabel = document.createElement("LABEL");
     checkboxLabel.textContent = operatorName;
     checkboxesDiv.appendChild(checkboxLabel);
+}
 
+function WriteCheckedOperatorsToFile(callerCheckbox)
+{
+    console.log(callerCheckbox.value);
 }

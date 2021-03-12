@@ -19,3 +19,17 @@
     background-color: #ddd;
     color: black;
   }
+
+  .OpRollingAreaColumn
+  {
+      float: left;
+      width: 12%;
+      padding: 15px;
+  }
+
+  .OpRollingAreaRow
+  {
+    content: "";
+    display: table;
+    clear: both;
+  }

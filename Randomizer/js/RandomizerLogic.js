@@ -56,7 +56,7 @@ rollATeamButton.onclick = function()
     
     rolledPoolOfOperators = ResetList();
     
-    for (var i = 0; i < 11; i++)
+    for (var i = 0; i < 12; i++)
     {
         rolledPoolOfOperators.push(GetRandomOperatorFromCompletePool());
     }
@@ -83,7 +83,7 @@ function GetRandomOperatorFromCompletePool()
 
 function FetchAllOperatorLabelsOnPage()
 {
-    var operatorLabels = document.getElementsByClassName("OperatorLabel");
+    var operatorLabels = document.getElementsByClassName("OpRollingAreaColumn");
     return operatorLabels;
 }
 

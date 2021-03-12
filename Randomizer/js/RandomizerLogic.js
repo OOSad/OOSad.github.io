@@ -1,4 +1,5 @@
 var completePoolOfOperators = ["Folinic", "Ceylon", "Breeze", "Sussurro", "Nightingale", "Shining", "Warfarin", "Silence", "Ptilopsis", "Perfumer", "Gavial", "Myrrh", "Ansel", "Hibiscus", "Lancet-2", "Scene", "Suzuran", "Podenco", "Tsukinogi", "Shamare", "Magallan", "Glaucus", "Angelina", "Sora", "Istina", "Pramanix", "Mayer", "Earthspirit", "Deepcolor", "Orchid", "Aciddrop", "Andreana", "Rosa(Poca)", "W", "Sesa", "GreyThroat", "Ambriel", "May", "Executor", "Vermeil", "Schwarz", "Catapult", "Exusiai", "Firewatch", "Provence", "Meteorite", "Platinum", "Blue Poison", "Shirayuki", "Meteor", "Jessica", "Adnachiel", "Kroos", "Rangers", "Chiave", "Elysium", "Bagpipe", "Reed", "Myrtle", "Grani", "Siege", "Texas", "Zima", "Vigna", "Scavenger", "Courier", "Plume", "Vanilla", "Fang", "Yato", "Jaye", "Weedy", "THRM-EX", "Phantom", "Aak", "Snowsant", "Waai Fu", "Ethan", "FEater", "Manticore", "Cliffheart", "Projekt Red", "Shaw", "Rope", "Gravel", "Eunectes", "Asbestos", "Nian", "Hung", "Bison", "Dur-nar", "Spot", "Saria", "Hoshiguma", "Vulcan", "Croissant", "Liskarm", "Nearl", "Gummy", "Cuora", "Matterhorn", "Beagle", "Cardigan", "Noir Corne", "Flint", "Thorns", "Ayerscarpe", "Sideroca", "Cutter", "Bibeak", "Utage", "Blaze", "Broca", "Flamebringer", "Hellagur", "Astesia", "Ch'en", "Swire", "Popukar", "Skadi", "Beehunter", "Midnight", "Savage", "SilverAsh", "Specter", "Lappland", "Indra", "Franka", "Mousse", "Estelle", "Frostleaf", "Matoimaru", "Dobermann", "Melantha", "Castle-3", "Tomimi", "Beeswax", "Click", "Leonhardt", "Absinthe", "Ceobe", "Leizi", "Mostima", "Greyy", "Nightmare", "Eyjafjalla", "Ifrit", "Skyfire", "Amiya", "Gitano", "Haze", "Steward", "Lava", "12F", "Durin"];
+var userPoolOfOperatorsFromUserOpsFile = [];
 var userPoolOfOperators = [];
 var rolledPoolOfOperators = [];
 
@@ -19,12 +20,40 @@ var fiveStarOperators = ["Flint", "Tomimi", "Scene", "Andreana", "Chiave", "Bees
 var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", "W", "Phantom", "Bagpipe", "Ceobe", "Nian", "Aak", "Blaze", "Mostima", "Magallan", "Hellagur", "Schwarz", "Ch'en", "Skadi", "SilverAsh", "Saria", "Hoshiguma", "Nightingale", "Shining", "Angelina", "Eyjafjalla", "Ifrit", "Siege", "Exusiai"];
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
+var userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckboxes");
+
 
 for (var i = 0; i < completePoolOfOperators.length; i++)
 {
     CreateOperatorCheckbox(completePoolOfOperators[i]);
     CreateOperatorCheckboxLabel(completePoolOfOperators[i]);
 }
+
+
+userPoolOfOperatorsFromUserOpsFile = JSON.parse(localStorage.getItem("UserOps"));
+
+
+console.log(userPoolOfOperatorsFromUserOpsFile);
+
+
+for (var i = 0; i < userPoolOfOperatorsFromUserOpsFile.length; i++)
+{
+    for (var x = 0; x < userOperatorCheckboxes.length; x++)
+    {
+        if (userOperatorCheckboxes[x].value == userPoolOfOperatorsFromUserOpsFile[i])
+        {
+            userOperatorCheckboxes[x].checked = true;
+            console.log("It's a match, baby!");
+        }
+
+        else
+        {
+            console.log("No matches found!");
+        }
+    }
+}
+    
+
 
 console.log(document.getElementsByClassName("UserOperatorCheckbox").length);
 
@@ -88,6 +117,7 @@ function CreateOperatorCheckbox(operatorName)
     var checkboxesDiv = document.getElementById("checkboxes");
     var checkbox = document.createElement("INPUT");
     checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("class", "UserOperatorCheckboxes");
     checkbox.setAttribute("onchange", "AddCheckedOperatorsToArray(this)");
     checkbox.value = operatorName;
     checkboxesDiv.appendChild(checkbox);
@@ -113,11 +143,18 @@ function AddCheckedOperatorsToArray(callerCheckbox)
         userPoolOfOperators.splice(userPoolOfOperators.indexOf(callerCheckbox.value), 1);
     }
 
+    ClearUserOperatorsFile(localStorage.getItem("UserOps"));
     WriteUserOperatorsArrayToFile(userPoolOfOperators);
 }
 
 function WriteUserOperatorsArrayToFile(userOperators)
 {
-    localStorage.setItem("UserOps", userOperators);
-    console.log(localStorage.getItem("UserOps"));
+    
+    localStorage.setItem("UserOps", JSON.stringify(userOperators));
+    //console.log(localStorage.getItem("UserOps"));
+}
+
+function ClearUserOperatorsFile(userOperators)
+{
+    userOperators = [];
 }

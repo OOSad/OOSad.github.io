@@ -41,6 +41,7 @@ for (var i = 0; i < userPoolOfOperators.length; i++)
 {
     for (var x = 0; x < userOperatorCheckboxes.length; x++)
     {
+        
         if (userOperatorCheckboxes[x].value == userPoolOfOperators[i])
         {
             userOperatorCheckboxes[x].checked = true;
@@ -54,11 +55,6 @@ rollATeamButton.onclick = function()
     console.clear();
     
     rolledPoolOfOperators = ResetList();
-
-    for (var i = 0; i < 11; i++)
-    {
-        console.log(rolledPoolOfOperators[i]);
-    }
     
     for (var i = 0; i < 11; i++)
     {
@@ -103,19 +99,22 @@ function UpdateOperatorLabelsOnPage()
 
 function CreateOperatorCheckbox(operatorName)
 {
-    var checkboxesDiv = document.getElementById("checkboxes");
+    var checkboxesDiv = document.getElementById("checkboxesDiv");
     var checkbox = document.createElement("INPUT");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "UserOperatorCheckboxes");
     checkbox.setAttribute("onchange", "AddCheckedOperatorsToArray(this)");
+    
     checkbox.value = operatorName;
     checkboxesDiv.appendChild(checkbox);
+    
 }
 
 function CreateOperatorCheckboxLabel(operatorName)
 {
-    var checkboxesDiv = document.getElementById("checkboxes");
+    var checkboxesDiv = document.getElementById("checkboxesDiv");
     var checkboxLabel = document.createElement("LABEL");
+    checkboxLabel.for
     checkboxLabel.textContent = operatorName;
     checkboxesDiv.appendChild(checkboxLabel);
 }

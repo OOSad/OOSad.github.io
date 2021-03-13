@@ -36,16 +36,20 @@
 
   #dummyCheckbox
   {
-    display:flex;
-    width: 130px;
-    height: 290px;
-    border: 10px 3px;
-    justify-content: flex-end;
+    display: flex;
+    width: 75px;
+    height: 75px;
+    padding-bottom: 10px;
+    margin: 5px;
+    justify-content: center;
     align-items: flex-end;
-    background-color: blue;
+    background-color: whitesmoke;
+    color:black;
+    
   }
 
   #checkboxesDiv
   {
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;      
   }

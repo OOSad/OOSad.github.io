@@ -24,8 +24,9 @@ var userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckb
 
 for (var i = 0; i < completePoolOfOperators.length; i++)
 {
-    CreateOperatorCheckbox(completePoolOfOperators[i]);
-    CreateOperatorCheckboxLabel(completePoolOfOperators[i]);
+    //CreateOperatorCheckbox(completePoolOfOperators[i]);
+    //CreateOperatorCheckboxLabel(completePoolOfOperators[i]);
+    CreateDummyCheckbox();
 }
 
 if (JSON.parse(localStorage.getItem("UserOps") == null))
@@ -104,7 +105,6 @@ function CreateOperatorCheckbox(operatorName)
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "UserOperatorCheckboxes");
     checkbox.setAttribute("onchange", "AddCheckedOperatorsToArray(this)");
-    
     checkbox.value = operatorName;
     checkboxesDiv.appendChild(checkbox);
     
@@ -114,9 +114,17 @@ function CreateOperatorCheckboxLabel(operatorName)
 {
     var checkboxesDiv = document.getElementById("checkboxesDiv");
     var checkboxLabel = document.createElement("LABEL");
-    checkboxLabel.for
     checkboxLabel.textContent = operatorName;
+    checkboxLabel.style.backgroundColor = "whitesmoke";
     checkboxesDiv.appendChild(checkboxLabel);
+}
+
+function CreateDummyCheckbox()
+{
+    var dummyCheckbox = document.getElementById("dummyCheckbox");
+    var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
+    document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
+
 }
 
 function AddCheckedOperatorsToArray(callerCheckbox)

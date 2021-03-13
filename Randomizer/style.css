@@ -33,3 +33,19 @@
     display: table;
     clear: both;
   }
+
+  #dummyCheckbox
+  {
+    display:flex;
+    width: 130px;
+    height: 290px;
+    border: 10px 3px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-color: blue;
+  }
+
+  #checkboxesDiv
+  {
+    display: inline-flex;
+  }

@@ -114,21 +114,29 @@ function ResetList()
     return listToClearOut;
 }
 
+
+
 function GetRandomNumber(min, max) 
 {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
+
+
 
 function GetRandomOperatorFromCompletePool()
 {
     return completePoolOfOperators[GetRandomNumber(0, completePoolOfOperators.length)];
 }
 
+
+
 function FetchAllOperatorLabelsOnPage()
 {
     var operatorLabels = document.getElementsByClassName("OpRollingAreaColumn");
     return operatorLabels;
 }
+
+
 
 function UpdateOperatorLabelsOnPage()
 {
@@ -139,6 +147,7 @@ function UpdateOperatorLabelsOnPage()
         operatorLabels[i].textContent = rolledPoolOfOperators[i];
     }
 }
+
 
 
 function CreateDummyCheckbox(operatorName)
@@ -155,6 +164,8 @@ function CreateDummyCheckbox(operatorName)
 
 }
 
+
+
 function AddCheckedOperatorsToArray(callerCheckbox)
 {
     if (callerCheckbox.checked)
@@ -170,15 +181,21 @@ function AddCheckedOperatorsToArray(callerCheckbox)
     WriteUserOperatorsArrayToFile(userPoolOfOperators);
 }
 
+
+
 function WriteUserOperatorsArrayToFile(userOperators)
 {
     localStorage.setItem("UserOps", JSON.stringify(userOperators));
 }
 
+
+
 function ClearUserOperatorsFile(userOperators)
 {
     userOperators = [];
 }
+
+
 
 function ToggleOperatorClassFromListOfClassesToInclude(callerCheckbox)
 {
@@ -191,5 +208,6 @@ function ToggleOperatorClassFromListOfClassesToInclude(callerCheckbox)
     {
         listOfOperatorClassesToInclude.push(callerCheckbox.value);
     }
+    
     console.log(listOfOperatorClassesToInclude);
 }

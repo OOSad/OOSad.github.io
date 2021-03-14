@@ -225,13 +225,15 @@ function ToggleOperatorClassFromListOfClasses(callerCheckbox)
         listOfOperatorClassesToExclude.splice(listOfOperatorClassesToExclude.indexOf(callerCheckbox.value), 1);
     }
     
-    console.log(listOfOperatorClassesToExclude);
 }
 
 
 
 function FilterOutUnselectedClasses(listOfClasses)
 {
+
+    console.log(listOfOperatorClassesToExclude);
+
     for (var i = 0; i < listOfClasses.length; i++)
     {
         switch (listOfClasses[i])
@@ -305,7 +307,7 @@ function FilterOutIndividualClass(operatorsToFilter)
         {
             if (operatorsToFilter[i] == completePoolOfOperators[x])
             {
-                completePoolOfOperators.splice(operatorsToFilter[i], 1);
+                completePoolOfOperators.splice(completePoolOfOperators.indexOf(operatorsToFilter[i]), 1);
             }
 
             else {}

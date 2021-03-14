@@ -53,3 +53,9 @@
     display: flex;
     flex-wrap: wrap;      
   }
+
+  #UserInputDiv
+  {
+    display: flex;
+    justify-content: space-evenly;
+  }

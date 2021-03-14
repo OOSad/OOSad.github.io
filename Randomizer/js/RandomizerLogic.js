@@ -260,6 +260,30 @@ function FilterOutUnselectedClasses(listOfClasses)
             case "Casters":
             FilterOutIndividualClass(casterOperators);
             break;
+
+            case "OneStar":
+            FilterOutIndividualClass(oneStarOperators);
+            break;
+
+            case "TwoStar":
+            FilterOutIndividualClass(twoStarOperators);
+            break;
+
+            case "ThreeStar":
+            FilterOutIndividualClass(threeStarOperators);
+            break;
+
+            case "FourStar":
+            FilterOutIndividualClass(fourStarOperators);
+            break;
+
+            case "FiveStar":
+            FilterOutIndividualClass(fiveStarOperators);
+            break;
+
+            case "SixStar":
+            FilterOutIndividualClass(sixStarOperators);
+            break;
         }
     }
 }

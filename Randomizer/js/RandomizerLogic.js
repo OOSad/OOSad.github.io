@@ -32,7 +32,6 @@ var desiredTeamSize;
 // MAIN EXECUTION
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
-var desiredTeamSize = document.getElementById("DesiredTeamSizeField");
 
 for (var i = 0; i < completePoolOfOperators.length; i++)
 {
@@ -69,8 +68,10 @@ rollATeamButton.onclick = function()
     console.clear();
     
     rolledPoolOfOperators = ResetList();
+
+    desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
     
-    for (var i = 0; i < 12; i++)
+    for (var i = 0; i < desiredTeamSize; i++)
     {
         rolledPoolOfOperators.push(GetRandomOperatorFromCompletePool());
     }

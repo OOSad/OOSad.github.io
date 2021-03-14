@@ -76,7 +76,9 @@ rollATeamButton.onclick = function()
 {
     console.clear();
     
-    rolledPoolOfOperators = ResetList();
+    rolledPoolOfOperators = EmptyList();
+
+    FilterOutUnselectedClasses(listOfOperatorClassesToExclude);
 
     desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
     
@@ -87,7 +89,6 @@ rollATeamButton.onclick = function()
 
     UpdateOperatorLabelsOnPage();
 
-    FilterOutUnselectedClasses(listOfOperatorClassesToExclude);
 }
 
 
@@ -110,12 +111,17 @@ rollATeamButton.onclick = function()
 
 // UTILITY FUNCTIONS
 
-function ResetList()
+function EmptyList()
 {
     var listToClearOut = [];
     return listToClearOut;
 }
 
+
+function ResetList()
+{
+
+}
 
 
 function GetRandomNumber(min, max) 
@@ -223,29 +229,52 @@ function FilterOutUnselectedClasses(listOfClasses)
         switch (listOfClasses[i])
         {
             case "Medics":
-            console.log("Bazzinga!");
+            FilterOutIndividualClass(medicOperators);
             break;
 
             case "Supporters":
+            FilterOutIndividualClass(supporterOperators);
             break;
             
             case "Snipers":
+            FilterOutIndividualClass(sniperOperators);
             break;
 
             case "Vanguards":
+            FilterOutIndividualClass(vanguardOperators);
             break;
 
             case "Specialists":
+            FilterOutIndividualClass(specialistOperators);
             break;
 
             case "Defenders":
+            FilterOutIndividualClass(defenderOperators);
             break;
 
             case "Guards":
+            FilterOutIndividualClass(guardOperators);
             break;
 
             case "Casters":
+            FilterOutIndividualClass(casterOperators);
             break;
         }
     }
+}
+
+function FilterOutIndividualClass(operatorsToFilter)
+{
+    for (var i = 0; i < operatorsToFilter.length; i++)
+    {
+        for (var x = 0; x < completePoolOfOperators.length; x++)
+        {
+            if (operatorsToFilter[i] == completePoolOfOperators[x])
+            {
+                console.log(completePoolOfOperators[x]);
+                completePoolOfOperators.splice(operatorsToFilter[i], 1);
+            }
+        }
+    }
+
 }

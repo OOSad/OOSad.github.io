@@ -14,6 +14,8 @@ var defenderOperators = ["Eunectes", "Asbestos", "Nian", "Hung", "Bison", "Dur-n
 var guardOperators = ["Flint", "Thorns", "Ayerscarpe", "Sideroca", "Cutter", "Bibeak", "Utage", "Blaze", "Broca", "Flamebringer", "Hellagur", "Astesia", "Ch'en", "Swire", "Popukar", "Skadi", "Beehunter", "Midnight", "Savage", "SilverAsh", "Specter", "Lappland", "Indra", "Franka", "Mousse", "Estelle", "Frostleaf", "Matoimaru", "Dobermann", "Melantha", "Castle-3"];
 var casterOperators = ["Tomimi", "Beeswax", "Click", "Leonhardt", "Absinthe", "Ceobe", "Leizi", "Mostima", "Greyy", "Nightmare", "Eyjafjalla", "Ifrit", "Skyfire", "Amiya", "Gitano", "Haze", "Steward", "Lava", "12F", "Durin"];
 
+var listOfOperatorClassesToInclude = ["Medics", "Supporters", "Snipers", "Vanguards", "Specialists", "Defenders", "Guards", "Casters"];
+
 var oneStarOperators = ["THRM-EX", "Castle-3", "Lancet-2"];
 var twoStarOperators = ["12F", "Durin", "Rangers", "Noir Corne", "Yato"];
 var threeStarOperators = ["Spot", "Popukar", "Midnight", "Catapult", "Orchid", "Steward", "Ansel", "Hibiscus", "Lava", "Adnachiel", "Kroos", "Beagle", "Cardigan", "Melantha", "Plume", "Vanilla", "Fang"];
@@ -22,6 +24,13 @@ var fiveStarOperators = ["Flint", "Tomimi", "Scene", "Andreana", "Chiave", "Bees
 var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", "W", "Phantom", "Bagpipe", "Ceobe", "Nian", "Aak", "Blaze", "Mostima", "Magallan", "Hellagur", "Schwarz", "Ch'en", "Skadi", "SilverAsh", "Saria", "Hoshiguma", "Nightingale", "Shining", "Angelina", "Eyjafjalla", "Ifrit", "Siege", "Exusiai"];
 
 var desiredTeamSize;
+
+
+
+
+
+
+
 
 
 
@@ -78,6 +87,9 @@ rollATeamButton.onclick = function()
 
     UpdateOperatorLabelsOnPage();
 }
+
+
+
 
 
 
@@ -166,4 +178,18 @@ function WriteUserOperatorsArrayToFile(userOperators)
 function ClearUserOperatorsFile(userOperators)
 {
     userOperators = [];
+}
+
+function ToggleOperatorClassFromListOfClassesToInclude(callerCheckbox)
+{
+    if (!callerCheckbox.checked)
+    {
+        listOfOperatorClassesToInclude.splice(listOfOperatorClassesToInclude.indexOf(callerCheckbox.value), 1);
+    }
+
+    else
+    {
+        listOfOperatorClassesToInclude.push(callerCheckbox.value);
+    }
+    console.log(listOfOperatorClassesToInclude);
 }

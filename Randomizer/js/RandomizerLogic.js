@@ -14,7 +14,7 @@ var defenderOperators = ["Eunectes", "Asbestos", "Nian", "Hung", "Bison", "Dur-n
 var guardOperators = ["Flint", "Thorns", "Ayerscarpe", "Sideroca", "Cutter", "Bibeak", "Utage", "Blaze", "Broca", "Flamebringer", "Hellagur", "Astesia", "Ch'en", "Swire", "Popukar", "Skadi", "Beehunter", "Midnight", "Savage", "SilverAsh", "Specter", "Lappland", "Indra", "Franka", "Mousse", "Estelle", "Frostleaf", "Matoimaru", "Dobermann", "Melantha", "Castle-3"];
 var casterOperators = ["Tomimi", "Beeswax", "Click", "Leonhardt", "Absinthe", "Ceobe", "Leizi", "Mostima", "Greyy", "Nightmare", "Eyjafjalla", "Ifrit", "Skyfire", "Amiya", "Gitano", "Haze", "Steward", "Lava", "12F", "Durin"];
 
-var listOfOperatorClassesToInclude = ["Medics", "Supporters", "Snipers", "Vanguards", "Specialists", "Defenders", "Guards", "Casters"];
+var listOfOperatorClassesToExclude = [];
 
 var oneStarOperators = ["THRM-EX", "Castle-3", "Lancet-2"];
 var twoStarOperators = ["12F", "Durin", "Rangers", "Noir Corne", "Yato"];
@@ -86,6 +86,8 @@ rollATeamButton.onclick = function()
     }
 
     UpdateOperatorLabelsOnPage();
+
+    FilterOutUnselectedClasses(listOfOperatorClassesToExclude);
 }
 
 
@@ -197,17 +199,53 @@ function ClearUserOperatorsFile(userOperators)
 
 
 
-function ToggleOperatorClassFromListOfClassesToInclude(callerCheckbox)
+function ToggleOperatorClassFromListOfClasses(callerCheckbox)
 {
     if (!callerCheckbox.checked)
     {
-        listOfOperatorClassesToInclude.splice(listOfOperatorClassesToInclude.indexOf(callerCheckbox.value), 1);
+        listOfOperatorClassesToExclude.push(callerCheckbox.value);
     }
 
     else
     {
-        listOfOperatorClassesToInclude.push(callerCheckbox.value);
+        listOfOperatorClassesToExclude.splice(listOfOperatorClassesToExclude.indexOf(callerCheckbox.value), 1);
     }
     
-    console.log(listOfOperatorClassesToInclude);
+    console.log(listOfOperatorClassesToExclude);
+}
+
+
+
+function FilterOutUnselectedClasses(listOfClasses)
+{
+    for (var i = 0; i < listOfClasses.length; i++)
+    {
+        switch (listOfClasses[i])
+        {
+            case "Medics":
+            console.log("Bazzinga!");
+            break;
+
+            case "Supporters":
+            break;
+            
+            case "Snipers":
+            break;
+
+            case "Vanguards":
+            break;
+
+            case "Specialists":
+            break;
+
+            case "Defenders":
+            break;
+
+            case "Guards":
+            break;
+
+            case "Casters":
+            break;
+        }
+    }
 }

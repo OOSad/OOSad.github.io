@@ -174,6 +174,7 @@ function CreateDummyCheckbox(operatorName)
 
 
 
+
 function AddCheckedOperatorsToArray(callerCheckbox)
 {
     if (callerCheckbox.checked)

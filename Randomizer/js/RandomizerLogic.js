@@ -16,7 +16,7 @@ var defenderOperators = ["Eunectes", "Asbestos", "Nian", "Hung", "Bison", "Dur-n
 var guardOperators = ["Flint", "Thorns", "Ayerscarpe", "Sideroca", "Cutter", "Bibeak", "Utage", "Blaze", "Broca", "Flamebringer", "Hellagur", "Astesia", "Ch'en", "Swire", "Popukar", "Skadi", "Beehunter", "Midnight", "Savage", "SilverAsh", "Specter", "Lappland", "Indra", "Franka", "Mousse", "Estelle", "Frostleaf", "Matoimaru", "Dobermann", "Melantha", "Castle-3"];
 var casterOperators = ["Tomimi", "Beeswax", "Click", "Leonhardt", "Absinthe", "Ceobe", "Leizi", "Mostima", "Greyy", "Nightmare", "Eyjafjalla", "Ifrit", "Skyfire", "Amiya", "Gitano", "Haze", "Steward", "Lava", "12F", "Durin"];
 
-var listOfOperatorClassesToExclude = [];
+var listOfThingsToFilterPoolWith = [];
 
 var oneStarOperators = ["THRM-EX", "Castle-3", "Lancet-2"];
 var twoStarOperators = ["12F", "Durin", "Rangers", "Noir Corne", "Yato"];
@@ -82,7 +82,7 @@ rollATeamButton.onclick = function()
 
     ResetCompletePoolOfOperatorsToDefault();
 
-    FilterOutUnselectedClasses(listOfOperatorClassesToExclude);
+    FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
 
     desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
     
@@ -217,22 +217,22 @@ function ToggleOperatorClassFromListOfClasses(callerCheckbox)
 {
     if (!callerCheckbox.checked)
     {
-        listOfOperatorClassesToExclude.push(callerCheckbox.value);
+        listOfThingsToFilterPoolWith.push(callerCheckbox.value);
     }
 
     else
     {
-        listOfOperatorClassesToExclude.splice(listOfOperatorClassesToExclude.indexOf(callerCheckbox.value), 1);
+        listOfThingsToFilterPoolWith.splice(listOfThingsToFilterPoolWith.indexOf(callerCheckbox.value), 1);
     }
     
 }
 
 
 
-function FilterOutUnselectedClasses(listOfClasses)
+function FilterOperatorPoolBasedOnPreferences(listOfClasses)
 {
 
-    console.log(listOfOperatorClassesToExclude);
+    console.log(listOfThingsToFilterPoolWith);
 
     for (var i = 0; i < listOfClasses.length; i++)
     {

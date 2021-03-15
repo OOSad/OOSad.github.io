@@ -15,28 +15,32 @@
     <div id="checkboxesDiv"><div id="dummyCheckbox"><label for="UserOperatorCheckbox" id="UserOperatorLabel">Name</label><input type="checkbox" id="UserOperatorCheckbox" class="UserOperatorCheckbox" onchange="AddCheckedOperatorsToArray(this)"></input></div></div>
     
 
-    <div class="OpRollingAreaRow">
-        <h2>OpRollingScreen</h2>
-        <h3 class="OpRollingAreaColumn">Op1</h3>
-        <h3 class="OpRollingAreaColumn">Op2</h3>
-        <h3 class="OpRollingAreaColumn">Op3</h3>
-        <h3 class="OpRollingAreaColumn">Op4</h3>
-        <h3 class="OpRollingAreaColumn">Op5</h3>
-        <h3 class="OpRollingAreaColumn">Op6</h3>
-        <h3 class="OpRollingAreaColumn">Op7</h3>
-        <h3 class="OpRollingAreaColumn">Op8</h3>
-        <h3 class="OpRollingAreaColumn">Op9</h3>
-        <h3 class="OpRollingAreaColumn">Op10</h3>
-        <h3 class="OpRollingAreaColumn">Op11</h3>
-        <h3 class="OpRollingAreaColumn">Op12</h3>
+    <div id="OpRollingAreaDiv">
+        <div class="OpRollingAreaRow">
+            <h2>OpRollingScreen</h2>
+            <h3 class="OpRollingAreaColumn">Op1</h3>
+            <h3 class="OpRollingAreaColumn">Op2</h3>
+            <h3 class="OpRollingAreaColumn">Op3</h3>
+            <h3 class="OpRollingAreaColumn">Op4</h3>
+            <h3 class="OpRollingAreaColumn">Op5</h3>
+            <h3 class="OpRollingAreaColumn">Op6</h3>
+            <h3 class="OpRollingAreaColumn">Op7</h3>
+            <h3 class="OpRollingAreaColumn">Op8</h3>
+            <h3 class="OpRollingAreaColumn">Op9</h3>
+            <h3 class="OpRollingAreaColumn">Op10</h3>
+            <h3 class="OpRollingAreaColumn">Op11</h3>
+            <h3 class="OpRollingAreaColumn">Op12</h3>
+        </div>
     </div>
+    
 
     <div id="UserInputDiv">
         <button id="RollATeamButton">Roll A Team</button>
         <div><label for="DesiredTeamSizeField">Team Size: </label><input type="number" id="DesiredTeamSizeField" min="1" max="12" value="12"></input></div>
     </div>
 
-    <div id="IncludedClassesDiv">
+    <div id="FiltersDiv">
+        <div id="IncludedClassesDiv">
         Classes To Include: 
         <div class="IncludedClassCheckbox">
             <input type="checkbox" id="MedicClassCheckbox" value="Medics" checked onchange="ToggleOperatorClassFromListOfClasses(this)">
@@ -98,6 +102,8 @@
             <input type="checkbox" id="SixStarCheckbox" value="SixStar" checked onchange="ToggleOperatorClassFromListOfClasses(this)">
             <label for="SixStarCheckbox">*6</label>
         </div>
+    </div>
+    
 
 
     <script type="text/javascript" src="./js/RandomizerLogic.js"></script>

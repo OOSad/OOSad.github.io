@@ -137,10 +137,14 @@ function ResetCompletePoolOfOperatorsToDefault()
     }
 }
 
+
+
 function PushOperatorIntoPoolOfRolledOperators(operator)
 {
     rolledPoolOfOperators.push(operator);
 }
+
+
 
 function GetRandomNumber(min, max) 
 {

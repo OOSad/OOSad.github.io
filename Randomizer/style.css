@@ -20,6 +20,12 @@
     color: black;
   }
 
+  #OpRollingAreaDiv
+  {
+    display: flex;
+    justify-content: center;
+  }
+
   .OpRollingAreaColumn
   {
       float: left;
@@ -58,4 +64,11 @@
   {
     display: flex;
     justify-content: space-evenly;
+  }
+
+  #FiltersDiv
+  {
+    display: flex;
+    justify-content: space-evenly;
+    
   }

@@ -92,7 +92,7 @@ rollATeamButton.onclick = function()
         
         completePoolOfOperators.splice(completePoolOfOperators.indexOf(selectedOperator), 1);
 
-        PushOperatorIntoPoolOfSelectedOperators(selectedOperator);
+        PushOperatorIntoPoolOfRolledOperators(selectedOperator);
     }
 
     UpdateOperatorLabelsOnPage();
@@ -137,21 +137,23 @@ function ResetCompletePoolOfOperatorsToDefault()
     }
 }
 
-function PushOperatorIntoPoolOfSelectedOperators(operator)
+function PushOperatorIntoPoolOfRolledOperators(operator)
 {
     rolledPoolOfOperators.push(operator);
 }
 
 function GetRandomNumber(min, max) 
 {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+    return Math.floor(Math.random() * (max - min) ) + min;
 }
 
 
 
 function GetRandomOperatorFromCompletePool()
 {
-    return completePoolOfOperators[GetRandomNumber(0, completePoolOfOperators.length)];
+    var randomNumber = GetRandomNumber(0, completePoolOfOperators.length);
+
+    return completePoolOfOperators[randomNumber];
 }
 
 
@@ -168,7 +170,8 @@ function UpdateOperatorLabelsOnPage()
 {
     var operatorLabels = FetchAllOperatorLabelsOnPage()
 
-    for (var i = 0; i < operatorLabels.length; i++)
+
+    for (var i = 0; i < rolledPoolOfOperators.length; i++)
     {
         operatorLabels[i].textContent = rolledPoolOfOperators[i];
     }

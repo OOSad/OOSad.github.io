@@ -88,7 +88,11 @@ rollATeamButton.onclick = function()
     
     for (var i = 0; i < desiredTeamSize; i++)
     {
-        rolledPoolOfOperators.push(GetRandomOperatorFromCompletePool());
+        var selectedOperator = GetRandomOperatorFromCompletePool();
+        
+        completePoolOfOperators.splice(completePoolOfOperators.indexOf(selectedOperator), 1);
+
+        PushOperatorIntoPoolOfSelectedOperators(selectedOperator);
     }
 
     UpdateOperatorLabelsOnPage();
@@ -121,6 +125,8 @@ function EmptyList()
     return listToClearOut;
 }
 
+
+
 function ResetCompletePoolOfOperatorsToDefault()
 {
     completePoolOfOperators = [];
@@ -129,6 +135,11 @@ function ResetCompletePoolOfOperatorsToDefault()
     {
         completePoolOfOperators.push(completePoolOfOperatorsDefault[i]);
     }
+}
+
+function PushOperatorIntoPoolOfSelectedOperators(operator)
+{
+    rolledPoolOfOperators.push(operator);
 }
 
 function GetRandomNumber(min, max) 

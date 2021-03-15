@@ -27,6 +27,7 @@ var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", 
 
 var desiredTeamSize;
 
+var desiredNumberOfMedics = 0;
 
 
 
@@ -65,7 +66,6 @@ for (var i = 0; i < userPoolOfOperators.length; i++)
 {
     for (var x = 0; x < userOperatorCheckboxes.length; x++)
     {
-        
         if (userOperatorCheckboxes[x].value == userPoolOfOperators[i])
         {
             userOperatorCheckboxes[x].checked = true;
@@ -82,13 +82,30 @@ rollATeamButton.onclick = function()
 
     ResetCompletePoolOfOperatorsToDefault();
 
+    console.log(desiredNumberOfMedics);
+
+    for (var i = 0; i < desiredNumberOfMedics; i++)
+    {
+        var randomOperator = GetRandomOperatorFromOperatorPool(medicOperators);
+        {
+            for (var x = 0; x < medicOperators.length; x++)
+            {
+                while (randomOperator != medicOperators[x])
+                {
+                    console.log(randomOperator);
+                }
+                
+            }
+        }
+    }
+
     FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
 
     desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
     
     for (var i = 0; i < desiredTeamSize; i++)
     {
-        var selectedOperator = GetRandomOperatorFromCompletePool();
+        var selectedOperator = GetRandomOperatorFromOperatorPool(completePoolOfOperators);
         
         completePoolOfOperators.splice(completePoolOfOperators.indexOf(selectedOperator), 1);
 
@@ -153,11 +170,11 @@ function GetRandomNumber(min, max)
 
 
 
-function GetRandomOperatorFromCompletePool()
+function GetRandomOperatorFromOperatorPool(operatorPool)
 {
-    var randomNumber = GetRandomNumber(0, completePoolOfOperators.length);
+    var randomNumber = GetRandomNumber(0, operatorPool.length);
 
-    return completePoolOfOperators[randomNumber];
+    return operatorPool[randomNumber];
 }
 
 
@@ -175,7 +192,7 @@ function UpdateOperatorLabelsOnPage()
     var operatorLabels = FetchAllOperatorLabelsOnPage()
 
 
-    for (var i = 0; i < rolledPoolOfOperators.length; i++)
+    for (var i = 0; i < operatorLabels.length; i++)
     {
         operatorLabels[i].textContent = rolledPoolOfOperators[i];
     }
@@ -331,5 +348,9 @@ function FilterOutIndividualClass(operatorsToFilter)
             else {}
         }
     }
+}
 
+function UpdateDesiredNumberOfMedics(numberOfMedics)
+{
+    desiredNumberOfMedics = numberOfMedics.value;
 }

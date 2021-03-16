@@ -82,6 +82,21 @@ for (var i = 0; i < userPoolOfOperators.length; i++)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 rollATeamButton.onclick = function()
 {
     console.clear();
@@ -94,22 +109,35 @@ rollATeamButton.onclick = function()
 
     console.log(desiredNumberOfMedics);
 
-    for (var i = 0; i < desiredNumberOfMedics; i++)
+    if (desiredNumberOfMedics != 0)
     {
-        var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
+        console.log("We in there!");
+        for (var i = 0; i < desiredNumberOfMedics; i++)
+        {
+            var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
 
-        console.log(randomMedic);
+            PushOperatorIntoPoolOfRolledOperators(randomMedic);
 
-        PushOperatorIntoPoolOfRolledOperators(randomMedic);
+            desiredTeamSize--;
 
-        desiredTeamSize--;
+            medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
 
-        medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+        }
 
-        completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
-
-        
+        for (var i = 0; i < completePoolOfOperators.length; i++)
+        {
+            for (var x = 0; x < medicOperatorsDefault.length; x++)
+            {
+                if (completePoolOfOperators[i] == medicOperatorsDefault[x])
+                {
+                    completePoolOfOperators.splice(completePoolOfOperators.indexOf(medicOperatorsDefault[x]), 1);
+                }
+            }
+        }
     }
+
+    
     
     console.log("medic ops: " + medicOperators.length);
     console.log("complete pool: " + completePoolOfOperators.length);

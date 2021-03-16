@@ -45,9 +45,9 @@ var desiredNumberOfMedics = 0;
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
 
-for (var i = 0; i < completePoolOfOperators.length; i++)
+for (var i = 0; i < completePoolOfOperatorsDefault.length; i++)
 {
-    CreateDummyCheckbox(completePoolOfOperators[i]);
+    CreateDummyCheckbox(completePoolOfOperatorsDefault[i]);
 }
 
 var userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckbox");
@@ -83,10 +83,31 @@ rollATeamButton.onclick = function()
 
     completePoolOfOperators = ResetPoolOfOperatorsToDefault(completePoolOfOperatorsDefault);
 
+    desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
+
+    console.log(desiredNumberOfMedics);
+
+    for (var i = 0; i < desiredNumberOfMedics; i++)
+    {
+        var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
+
+        console.log(randomMedic);
+
+        PushOperatorIntoPoolOfRolledOperators(randomMedic);
+
+        desiredTeamSize--;
+
+        medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+
+        completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+
+        
+    }
+    
+    console.log("medic ops: " + medicOperators.length);
+    console.log("complete pool: " + completePoolOfOperators.length);
 
     FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
-
-    desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
     
     for (var i = 0; i < desiredTeamSize; i++)
     {

@@ -1,6 +1,6 @@
 // PROGRAM VARIABLES
 
-var completePoolOfOperators = ["Folinic", "Ceylon", "Breeze", "Sussurro", "Nightingale", "Shining", "Warfarin", "Silence", "Ptilopsis", "Perfumer", "Gavial", "Myrrh", "Ansel", "Hibiscus", "Lancet-2", "Scene", "Suzuran", "Podenco", "Tsukinogi", "Shamare", "Magallan", "Glaucus", "Angelina", "Sora", "Istina", "Pramanix", "Mayer", "Earthspirit", "Deepcolor", "Orchid", "Aciddrop", "Andreana", "Rosa(Poca)", "W", "Sesa", "GreyThroat", "Ambriel", "May", "Executor", "Vermeil", "Schwarz", "Catapult", "Exusiai", "Firewatch", "Provence", "Meteorite", "Platinum", "Blue Poison", "Shirayuki", "Meteor", "Jessica", "Adnachiel", "Kroos", "Rangers", "Chiave", "Elysium", "Bagpipe", "Reed", "Myrtle", "Grani", "Siege", "Texas", "Zima", "Vigna", "Scavenger", "Courier", "Plume", "Vanilla", "Fang", "Yato", "Jaye", "Weedy", "THRM-EX", "Phantom", "Aak", "Snowsant", "Waai Fu", "Ethan", "FEater", "Manticore", "Cliffheart", "Projekt Red", "Shaw", "Rope", "Gravel", "Eunectes", "Asbestos", "Nian", "Hung", "Bison", "Dur-nar", "Spot", "Saria", "Hoshiguma", "Vulcan", "Croissant", "Liskarm", "Nearl", "Gummy", "Cuora", "Matterhorn", "Beagle", "Cardigan", "Noir Corne", "Flint", "Thorns", "Ayerscarpe", "Sideroca", "Cutter", "Bibeak", "Utage", "Blaze", "Broca", "Flamebringer", "Hellagur", "Astesia", "Ch'en", "Swire", "Popukar", "Skadi", "Beehunter", "Midnight", "Savage", "SilverAsh", "Specter", "Lappland", "Indra", "Franka", "Mousse", "Estelle", "Frostleaf", "Matoimaru", "Dobermann", "Melantha", "Castle-3", "Tomimi", "Beeswax", "Click", "Leonhardt", "Absinthe", "Ceobe", "Leizi", "Mostima", "Greyy", "Nightmare", "Eyjafjalla", "Ifrit", "Skyfire", "Amiya", "Gitano", "Haze", "Steward", "Lava", "12F", "Durin"];
+var completePoolOfOperators = [];
 var completePoolOfOperatorsDefault = ["Folinic", "Ceylon", "Breeze", "Sussurro", "Nightingale", "Shining", "Warfarin", "Silence", "Ptilopsis", "Perfumer", "Gavial", "Myrrh", "Ansel", "Hibiscus", "Lancet-2", "Scene", "Suzuran", "Podenco", "Tsukinogi", "Shamare", "Magallan", "Glaucus", "Angelina", "Sora", "Istina", "Pramanix", "Mayer", "Earthspirit", "Deepcolor", "Orchid", "Aciddrop", "Andreana", "Rosa(Poca)", "W", "Sesa", "GreyThroat", "Ambriel", "May", "Executor", "Vermeil", "Schwarz", "Catapult", "Exusiai", "Firewatch", "Provence", "Meteorite", "Platinum", "Blue Poison", "Shirayuki", "Meteor", "Jessica", "Adnachiel", "Kroos", "Rangers", "Chiave", "Elysium", "Bagpipe", "Reed", "Myrtle", "Grani", "Siege", "Texas", "Zima", "Vigna", "Scavenger", "Courier", "Plume", "Vanilla", "Fang", "Yato", "Jaye", "Weedy", "THRM-EX", "Phantom", "Aak", "Snowsant", "Waai Fu", "Ethan", "FEater", "Manticore", "Cliffheart", "Projekt Red", "Shaw", "Rope", "Gravel", "Eunectes", "Asbestos", "Nian", "Hung", "Bison", "Dur-nar", "Spot", "Saria", "Hoshiguma", "Vulcan", "Croissant", "Liskarm", "Nearl", "Gummy", "Cuora", "Matterhorn", "Beagle", "Cardigan", "Noir Corne", "Flint", "Thorns", "Ayerscarpe", "Sideroca", "Cutter", "Bibeak", "Utage", "Blaze", "Broca", "Flamebringer", "Hellagur", "Astesia", "Ch'en", "Swire", "Popukar", "Skadi", "Beehunter", "Midnight", "Savage", "SilverAsh", "Specter", "Lappland", "Indra", "Franka", "Mousse", "Estelle", "Frostleaf", "Matoimaru", "Dobermann", "Melantha", "Castle-3", "Tomimi", "Beeswax", "Click", "Leonhardt", "Absinthe", "Ceobe", "Leizi", "Mostima", "Greyy", "Nightmare", "Eyjafjalla", "Ifrit", "Skyfire", "Amiya", "Gitano", "Haze", "Steward", "Lava", "12F", "Durin"];
 
 var userPoolOfOperators = [""];
@@ -80,24 +80,9 @@ rollATeamButton.onclick = function()
     
     rolledPoolOfOperators = EmptyList();
 
-    ResetCompletePoolOfOperatorsToDefault();
 
-    console.log(desiredNumberOfMedics);
+    completePoolOfOperators = ResetPoolOfOperatorsToDefault(completePoolOfOperatorsDefault);
 
-    for (var i = 0; i < desiredNumberOfMedics; i++)
-    {
-        var randomOperator = GetRandomOperatorFromOperatorPool(medicOperators);
-        {
-            for (var x = 0; x < medicOperators.length; x++)
-            {
-                while (randomOperator != medicOperators[x])
-                {
-                    console.log(randomOperator);
-                }
-                
-            }
-        }
-    }
 
     FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
 
@@ -143,17 +128,17 @@ function EmptyList()
 }
 
 
-
-function ResetCompletePoolOfOperatorsToDefault()
+function ResetPoolOfOperatorsToDefault(poolOfDefaultsGlobal)
 {
-    completePoolOfOperators = [];
-    
-    for (var i = 0; i < completePoolOfOperatorsDefault.length; i++)
-    {
-        completePoolOfOperators.push(completePoolOfOperatorsDefault[i]);
-    }
-}
+    var poolToReset = [];
 
+    for (var i = 0; i < poolOfDefaultsGlobal.length; i++)
+    {
+        poolToReset.push(poolOfDefaultsGlobal[i]);
+    }
+
+    return poolToReset;
+}
 
 
 function PushOperatorIntoPoolOfRolledOperators(operator)
@@ -327,6 +312,9 @@ function FilterOperatorPoolBasedOnPreferences(listOfClasses)
 
             case "SixStar":
             FilterOutIndividualClass(sixStarOperators);
+            break;
+
+            default:
             break;
         }
     }

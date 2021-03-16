@@ -114,6 +114,9 @@ rollATeamButton.onclick = function()
 
     desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
 
+    FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
+
+
     if (desiredNumberOfMedics != 0)
     {
         for (var i = 0; i < desiredNumberOfMedics; i++)
@@ -132,10 +135,132 @@ rollATeamButton.onclick = function()
         completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
     }
 
+    if (desiredNumberOfSupporters != 0)
+    {
+        for (var i = 0; i < desiredNumberOfSupporters; i++)
+        {
+            var randomSupporter = GetRandomOperatorFromOperatorPool(supporterOperators);
+
+            PushOperatorIntoPoolOfRolledOperators(randomSupporter);
+
+            desiredTeamSize--;
+
+            supporterOperators.splice(completePoolOfOperators.indexOf(randomSupporter), 1);
+
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomSupporter), 1);
+        }
+
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, supporterOperators);
+    }
+
+    if (desiredNumberOfSnipers != 0)
+    {
+        for (var i = 0; i < desiredNumberOfSnipers; i++)
+        {
+            var randomSniper = GetRandomOperatorFromOperatorPool(sniperOperators);
+
+            PushOperatorIntoPoolOfRolledOperators(randomSniper);
+
+            desiredTeamSize--;
+
+            sniperOperators.splice(completePoolOfOperators.indexOf(randomSniper), 1);
+
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomSniper), 1);
+        }
+
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, sniperOperators);
+    }
+
+    if (desiredNumberOfVanguards != 0)
+    {
+        for (var i = 0; i < desiredNumberOfVanguards; i++)
+        {
+            var randomVanguard = GetRandomOperatorFromOperatorPool(vanguardOperators);
+
+            PushOperatorIntoPoolOfRolledOperators(randomVanguard);
+
+            desiredTeamSize--;
+
+            vanguardOperators.splice(completePoolOfOperators.indexOf(randomVanguard), 1);
+
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomVanguard), 1);
+        }
+
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, vanguardOperators);
+    }
+
+    if (desiredNumberOfSpecialists != 0)
+    {
+        for (var i = 0; i < desiredNumberOfSpecialists; i++)
+        {
+            var randomSpecialist = GetRandomOperatorFromOperatorPool(specialistOperators);
+
+            PushOperatorIntoPoolOfRolledOperators(randomSpecialist);
+
+            desiredTeamSize--;
+
+            specialistOperators.splice(completePoolOfOperators.indexOf(randomSpecialist), 1);
+
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomSpecialist), 1);
+        }
+
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, specialistOperators);
+    }
+
+    if (desiredNumberOfDefenders != 0)
+    {
+        for (var i = 0; i < desiredNumberOfDefenders; i++)
+        {
+            var randomDefender = GetRandomOperatorFromOperatorPool(defenderOperators);
+
+            PushOperatorIntoPoolOfRolledOperators(randomDefender);
+
+            desiredTeamSize--;
+
+            defenderOperators.splice(completePoolOfOperators.indexOf(randomDefender), 1);
+
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomDefender), 1);
+        }
+
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, defenderOperators);
+    }
+
+    if (desiredNumberOfGuards != 0)
+    {
+        for (var i = 0; i < desiredNumberOfGuards; i++)
+        {
+            var randomGuard = GetRandomOperatorFromOperatorPool(guardOperators);
+
+            PushOperatorIntoPoolOfRolledOperators(randomGuard);
+
+            desiredTeamSize--;
+
+            guardOperators.splice(completePoolOfOperators.indexOf(randomGuard), 1);
+
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomGuard), 1);
+        }
+
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, guardOperators);
+    }
+
+    if (desiredNumberOfCasters != 0)
+    {
+        for (var i = 0; i < desiredNumberOfCasters; i++)
+        {
+            var randomCaster = GetRandomOperatorFromOperatorPool(casterOperators);
+
+            PushOperatorIntoPoolOfRolledOperators(randomCaster);
+
+            desiredTeamSize--;
+
+            casterOperators.splice(completePoolOfOperators.indexOf(randomCaster), 1);
+
+            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomCaster), 1);
+        }
+
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, casterOperators);
+    }
     
-
-
-    FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
     
     for (var i = 0; i < desiredTeamSize; i++)
     {

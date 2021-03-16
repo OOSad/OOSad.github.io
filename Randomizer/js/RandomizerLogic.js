@@ -35,7 +35,14 @@ var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", 
 
 var desiredTeamSize;
 
-var desiredNumberOfMedics = 0;
+var desiredNumberOfMedics;
+var desiredNumberOfSupporters;
+var desiredNumberOfSnipers;
+var desiredNumberOfVanguards;
+var desiredNumberOfSpecialists;
+var desiredNumberOfDefenders;
+var desiredNumberOfGuards;
+var desiredNumberOfCasters;
 
 
 
@@ -412,4 +419,39 @@ function FilterOutIndividualClass(operatorsToFilter)
 function UpdateDesiredNumberOfMedics(numberOfMedics)
 {
     desiredNumberOfMedics = numberOfMedics.value;
+}
+
+function UpdateDesiredNumberOfSupporters(numberOfSupporters)
+{
+    desiredNumberOfSupporters = numberOfSupporters.value;
+}
+
+function UpdateDesiredNumberOfSnipers(numberOfSnipers)
+{
+    desiredNumberOfSnipers = numberOfSnipers.value;
+}
+
+function UpdateDesiredNumberOfVanguards(numberOfVanguards)
+{
+    desiredNumberOfVanguards = numberOfVanguards.value;
+}
+
+function UpdateDesiredNumberOfSpecialists(numberOfSpecialists)
+{
+    desiredNumberOfSpecialists = numberOfSpecialists.value;
+}
+
+function UpdateDesiredNumberOfDefenders(numberOfDefenders)
+{
+    desiredNumberOfDefenders = numberOfDefenders.value;
+}
+
+function UpdateDesiredNumberOfGuards(numberOfGuards)
+{
+    desiredNumberOfGuards = numberOfGuards.value;
+}
+
+function UpdateDesiredNumberOfCasters(numberOfCasters)
+{
+    desiredNumberOfCasters = numberOfCasters.value;
 }

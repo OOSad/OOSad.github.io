@@ -125,6 +125,8 @@ rollATeamButton.onclick = function()
         completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
     }
 
+    
+
 
     FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
     

@@ -107,11 +107,8 @@ rollATeamButton.onclick = function()
 
     desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
 
-    console.log(desiredNumberOfMedics);
-
     if (desiredNumberOfMedics != 0)
     {
-        console.log("We in there!");
         for (var i = 0; i < desiredNumberOfMedics; i++)
         {
             var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
@@ -125,22 +122,9 @@ rollATeamButton.onclick = function()
             completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
         }
 
-        for (var i = 0; i < completePoolOfOperators.length; i++)
-        {
-            for (var x = 0; x < medicOperatorsDefault.length; x++)
-            {
-                if (completePoolOfOperators[i] == medicOperatorsDefault[x])
-                {
-                    completePoolOfOperators.splice(completePoolOfOperators.indexOf(medicOperatorsDefault[x]), 1);
-                }
-            }
-        }
+        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
     }
 
-    
-    
-    console.log("medic ops: " + medicOperators.length);
-    console.log("complete pool: " + completePoolOfOperators.length);
 
     FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
     
@@ -176,6 +160,23 @@ rollATeamButton.onclick = function()
 
 
 // UTILITY FUNCTIONS
+
+function SpliceAnEntireClassOutOfOperatorPool(poolToSplice, classToSpliceOut)
+    {
+        for (var i = 0; i < poolToSplice.length; i++)
+        {
+            for (var x = 0; x < classToSpliceOut.length; x++)
+            {
+                if (poolToSplice[i] == classToSpliceOut[x])
+                {
+                    poolToSplice.splice(poolToSplice.indexOf(classToSpliceOut[x]), 1);
+                }
+            }
+        }
+
+        return poolToSplice;
+    }
+
 
 function EmptyList()
 {

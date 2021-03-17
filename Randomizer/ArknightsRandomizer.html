@@ -31,12 +31,17 @@
             <h3 class="OpRollingAreaColumn">Op11</h3>
             <h3 class="OpRollingAreaColumn">Op12</h3>
         </div>
+        <div>
+            <h2>Stage </h2>
+            <h3>STAGE</h3>
+        </div>
     </div>
     
 
     <div id="UserInputDiv">
         <button id="RollATeamButton">Roll A Team</button>
         <div><label for="DesiredTeamSizeField">Team Size: </label><input type="number" id="DesiredTeamSizeField" min="1" max="12" value="12" onchange="UpdateDesiredNumberOfMedics(this.value)"></input></div>
+        <button id="RollAStageButton">Roll A Stage</button>
     </div>
 
     <div id="FiltersDiv">
@@ -132,8 +137,41 @@
             <input type="number" id="IncludeFieldCasters" min="0" max="12" onchange="UpdateDesiredNumberOfCasters(this)"><label for="IncludeFieldCasters"> Caster(s)</label>
         </div>
     </div>
-    
 
+    <div id="IncludedStagesDiv">
+        Stages To Include: 
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterPrologueCheckbox" value="Prologue" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterPrologueCheckbox">Prologue</label>
+        </div>
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterOneCheckbox" value="ChapterOne" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterOneCheckbox">Chapter 1</label>
+        </div>
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterTwoCheckbox" value="ChapterTwo" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterTwoCheckbox">Chapter 2</label>
+        </div>
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterThreeCheckbox" value="ChapterThree" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterThreeCheckbox">Chapter 3</label>
+        </div>
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterFourCheckbox" value="ChapterFour" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterFourCheckbox">Chapter 4</label>
+        </div>
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterFiveCheckbox" value="ChapterFive" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterFiveCheckbox">Chapter 5</label>
+        </div>
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterSixCheckbox" value="ChapterSix" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterSixCheckbox">Chapter 6</label>
+        </div>
+        <div class="IncludedStageCheckbox">
+            <input type="checkbox" id="chapterSevenCheckbox" value="ChapterSeven" checked onchange="ToggleStagePoolFromListOfStages(this)">
+            <label for="chapterSevenCheckbox">Chapter 7</label>
+        </div>
 
     <script type="text/javascript" src="./js/RandomizerLogic.js"></script>
 </body>

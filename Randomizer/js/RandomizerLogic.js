@@ -537,3 +537,19 @@ function UpdateDesiredNumberOfCasters(numberOfCasters)
 {
     desiredNumberOfCasters = numberOfCasters.value;
 }
+
+
+function ToggleStagePoolFromListOfStages(callerCheckbox)
+{
+    if (!callerCheckbox.checked)
+    {
+        chaptersToFilterOut.push(callerCheckbox.value);
+    }
+
+    else
+    {
+        chaptersToFilterOut.splice(chaptersToFilterOut.indexOf(callerCheckbox.value), 1);
+    }
+
+    console.log(chaptersToFilterOut);
+}

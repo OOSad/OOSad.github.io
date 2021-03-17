@@ -35,14 +35,14 @@ var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", 
 
 var desiredTeamSize;
 
-var desiredNumberOfMedics;
-var desiredNumberOfSupporters;
-var desiredNumberOfSnipers;
-var desiredNumberOfVanguards;
-var desiredNumberOfSpecialists;
-var desiredNumberOfDefenders;
-var desiredNumberOfGuards;
-var desiredNumberOfCasters;
+var desiredNumberOfMedics = 0;
+var desiredNumberOfSupporters = 0;
+var desiredNumberOfSnipers = 0;
+var desiredNumberOfVanguards = 0;
+var desiredNumberOfSpecialists = 0;
+var desiredNumberOfDefenders = 0;
+var desiredNumberOfGuards = 0;
+var desiredNumberOfCasters = 0;
 
 
 

@@ -3,7 +3,6 @@
 var completePoolOfOperators = [];
 var completePoolOfOperatorsDefault = ["Folinic", "Ceylon", "Breeze", "Sussurro", "Nightingale", "Shining", "Warfarin", "Silence", "Ptilopsis", "Perfumer", "Gavial", "Myrrh", "Ansel", "Hibiscus", "Lancet-2", "Scene", "Suzuran", "Podenco", "Tsukinogi", "Shamare", "Magallan", "Glaucus", "Angelina", "Sora", "Istina", "Pramanix", "Mayer", "Earthspirit", "Deepcolor", "Orchid", "Aciddrop", "Andreana", "Rosa(Poca)", "W", "Sesa", "GreyThroat", "Ambriel", "May", "Executor", "Vermeil", "Schwarz", "Catapult", "Exusiai", "Firewatch", "Provence", "Meteorite", "Platinum", "Blue Poison", "Shirayuki", "Meteor", "Jessica", "Adnachiel", "Kroos", "Rangers", "Chiave", "Elysium", "Bagpipe", "Reed", "Myrtle", "Grani", "Siege", "Texas", "Zima", "Vigna", "Scavenger", "Courier", "Plume", "Vanilla", "Fang", "Yato", "Jaye", "Weedy", "THRM-EX", "Phantom", "Aak", "Snowsant", "Waai Fu", "Ethan", "FEater", "Manticore", "Cliffheart", "Projekt Red", "Shaw", "Rope", "Gravel", "Eunectes", "Asbestos", "Nian", "Hung", "Bison", "Dur-nar", "Spot", "Saria", "Hoshiguma", "Vulcan", "Croissant", "Liskarm", "Nearl", "Gummy", "Cuora", "Matterhorn", "Beagle", "Cardigan", "Noir Corne", "Flint", "Thorns", "Ayerscarpe", "Sideroca", "Cutter", "Bibeak", "Utage", "Blaze", "Broca", "Flamebringer", "Hellagur", "Astesia", "Ch'en", "Swire", "Popukar", "Skadi", "Beehunter", "Midnight", "Savage", "SilverAsh", "Specter", "Lappland", "Indra", "Franka", "Mousse", "Estelle", "Frostleaf", "Matoimaru", "Dobermann", "Melantha", "Castle-3", "Tomimi", "Beeswax", "Click", "Leonhardt", "Absinthe", "Ceobe", "Leizi", "Mostima", "Greyy", "Nightmare", "Eyjafjalla", "Ifrit", "Skyfire", "Amiya", "Gitano", "Haze", "Steward", "Lava", "12F", "Durin"];
 
-var userPoolOfOperators = [""];
 var rolledPoolOfOperators = [];
 var userOperatorCheckboxes = [];
 
@@ -61,7 +60,7 @@ var chapterFiveStages = [ "5-1", "5-2", "5-3", "5-4", "5-5", "5-6", "5-7", "5-8"
 var chapterSixStages = [ "6-1", "6-2", "6-3", "6-4", "6-5", "6-8", "6-9", "6-10", "6-11", "6-12", "6-14", "6-15", "6-16", "S6-1", "S6-2", "S6-3", "S6-4", "H6-1", "H6-2", "H6-3", "H6-4" ];
 var chapterSevenStages = [ "7-2", "7-3", "7-4", "7-5", "7-6", "7-8", "7-9", "7-10", "7-11", "7-12", "7-13", "7-14", "7-15", "7-16", "7-18", "S7-1", "S7-2", "H7-1", "H7-2", "H7-3", "H7-4" ];
         
-var completePoolOfStages = [ "0-1", "0-2", "0-3", "0-4", "0-5", "0-6", "0-7", "0-8", "0-9", "0-10", "0-11", "1-1", "1-2", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-12", "2-1", "S2-1", "2-2", "S2-2", "S2-3", "S2-4", "2-3", "2-4", "S2-5", "S2-6", "S2-7", "2-5", "2-6", "2-7", "S2-8", "S2-9", "2-8", "2-9", "S2-10", "S2-11", "S2-12", "2-10", "3-1", "3-2", "3-3", "3-4", "3-5", "3-6", "3-7", "3-8", "4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", "4-9", "4-10", "5-1", "5-2", "5-3", "5-4", "5-5", "5-6", "5-7", "5-8", "5-9", "5-10", "6-1", "6-2", "6-3", "6-4", "6-5", "6-8", "6-9", "6-10", "6-11", "6-12", "6-14", "6-15", "6-16", "7-2", "7-3", "7-4", "7-5", "7-6", "7-8", "7-9", "7-10", "7-11", "7-12", "7-13", "7-14", "7-15", "7-16", "7-18", "S3-1", "S3-2", "S3-3", "S3-4", "S3-5", "S3-6", "S4-1", "S4-2", "S4-3", "S4-4", "S4-5", "S4-6", "S4-7", "S4-8", "S4-9", "S4-10", "S5-1", "S5-2", "S5-3", "S5-4", "S5-5", "S5-6", "S5-7", "S5-8", "H5-1", "H5-2", "H5-3", "H5-4", "H6-1", "H6-2", "H6-3", "H6-4", "H7-1", "H7-2", "H7-3", "H7-4" ];
+var completePoolOfStages = [ ];
 var completePoolOfStagesDefault = [ "0-1", "0-2", "0-3", "0-4", "0-5", "0-6", "0-7", "0-8", "0-9", "0-10", "0-11", "1-1", "1-2", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-12", "2-1", "S2-1", "2-2", "S2-2", "S2-3", "S2-4", "2-3", "2-4", "S2-5", "S2-6", "S2-7", "2-5", "2-6", "2-7", "S2-8", "S2-9", "2-8", "2-9", "S2-10", "S2-11", "S2-12", "2-10", "3-1", "3-2", "3-3", "3-4", "3-5", "3-6", "3-7", "3-8", "4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", "4-9", "4-10", "5-1", "5-2", "5-3", "5-4", "5-5", "5-6", "5-7", "5-8", "5-9", "5-10", "6-1", "6-2", "6-3", "6-4", "6-5", "6-8", "6-9", "6-10", "6-11", "6-12", "6-14", "6-15", "6-16", "7-2", "7-3", "7-4", "7-5", "7-6", "7-8", "7-9", "7-10", "7-11", "7-12", "7-13", "7-14", "7-15", "7-16", "7-18", "S3-1", "S3-2", "S3-3", "S3-4", "S3-5", "S3-6", "S4-1", "S4-2", "S4-3", "S4-4", "S4-5", "S4-6", "S4-7", "S4-8", "S4-9", "S4-10", "S5-1", "S5-2", "S5-3", "S5-4", "S5-5", "S5-6", "S5-7", "S5-8", "H5-1", "H5-2", "H5-3", "H5-4", "H6-1", "H6-2", "H6-3", "H6-4", "H7-1", "H7-2", "H7-3", "H7-4" ];
 
 var chaptersToFilterOut = [];
@@ -79,6 +78,7 @@ var chaptersToFilterOut = [];
 // MAIN EXECUTION
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
+var rollAStageButton = document.getElementById("RollAStageButton");
 
 for (var i = 0; i < completePoolOfOperatorsDefault.length; i++)
 {
@@ -191,7 +191,26 @@ rollATeamButton.onclick = function()
 
 }
 
+rollAStageButton.onclick = function()
+{
+    console.clear();
 
+    completePoolOfStages = [];
+
+    for (var i = 0; i < completePoolOfStagesDefault.length; i++)
+    {
+        completePoolOfStages.push(completePoolOfStagesDefault[i]);
+    }
+     
+    FilterMapPoolBasedOnPreferences(chaptersToFilterOut);
+    
+    var selectedMap = GetRandomOperatorFromOperatorPool(completePoolOfStages);
+
+    
+
+    document.getElementById("StageLabel").textContent = selectedMap;
+
+}
 
 
 
@@ -539,6 +558,8 @@ function UpdateDesiredNumberOfCasters(numberOfCasters)
 }
 
 
+
+
 function ToggleStagePoolFromListOfStages(callerCheckbox)
 {
     if (!callerCheckbox.checked)
@@ -551,5 +572,67 @@ function ToggleStagePoolFromListOfStages(callerCheckbox)
         chaptersToFilterOut.splice(chaptersToFilterOut.indexOf(callerCheckbox.value), 1);
     }
 
+}
+
+function FilterMapPoolBasedOnPreferences(listOfChapters)
+{
+
     console.log(chaptersToFilterOut);
+
+    for (var i = 0; i < listOfChapters.length; i++)
+    {
+        switch (listOfChapters[i])
+        {
+            case "Prologue":
+                FilterOutIndividualPoolOfMaps(prologueStages);
+            break;
+
+            case "ChapterOne":
+                FilterOutIndividualPoolOfMaps(chapterOneStages);
+            break;
+            
+            case "ChapterTwo":
+                FilterOutIndividualPoolOfMaps(chapterTwoStages);
+            break;
+
+            case "ChapterThree":
+                FilterOutIndividualPoolOfMaps(chapterThreeStages);
+            break;
+
+            case "ChapterFour":
+                FilterOutIndividualPoolOfMaps(chapterFourStages);
+            break;
+
+            case "ChapterFive":
+                FilterOutIndividualPoolOfMaps(chapterFiveStages);
+            break;
+
+            case "ChapterSix":
+                FilterOutIndividualPoolOfMaps(chapterSixStages);
+            break;
+
+            case "ChapterSeven":
+                FilterOutIndividualPoolOfMaps(chapterSevenStages);
+            break;
+
+            default:
+            break;
+        }
+    }
+}
+
+function FilterOutIndividualPoolOfMaps(stagesToFilter)
+{
+    for (var i = 0; i < stagesToFilter.length; i++)
+    {
+        for (var x = 0; x < completePoolOfStages.length; x++)
+        {
+            if (stagesToFilter[i] == completePoolOfStages[x])
+            {
+                completePoolOfStages.splice(completePoolOfStages.indexOf(stagesToFilter[i]), 1);
+            }
+
+            else {}
+        }
+    }
 }

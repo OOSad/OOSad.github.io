@@ -120,158 +120,41 @@ rollATeamButton.onclick = function()
     if (desiredNumberOfMedics != 0)
     {
         CheckAndAddRandomUnit(desiredNumberOfMedics, completePoolOfOperators, medicOperators);
-
-        // for (var i = 0; i < desiredNumberOfMedics; i++)
-        // {
-        //     var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
-
-        //     for (var y = 0; y < completePoolOfOperators.length; y++)
-        //     {
-
-        //         if (completePoolOfOperators[y] == randomMedic)
-        //         {
-        //             PushOperatorIntoPoolOfRolledOperators(randomMedic);
-
-        //             desiredTeamSize--;
-
-        //             medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
-
-        //             completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
-        //         }
-        //     }
-        // }
-
-        // completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
     }
-
-    
-
-    
 
     if (desiredNumberOfSupporters != 0)
     {
-        for (var i = 0; i < desiredNumberOfSupporters; i++)
-        {
-            var randomSupporter = GetRandomOperatorFromOperatorPool(supporterOperators);
-
-            PushOperatorIntoPoolOfRolledOperators(randomSupporter);
-
-            desiredTeamSize--;
-
-            supporterOperators.splice(completePoolOfOperators.indexOf(randomSupporter), 1);
-
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomSupporter), 1);
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, supporterOperators);
+        CheckAndAddRandomUnit(desiredNumberOfSupporters, completePoolOfOperators, supporterOperators);
     }
 
     if (desiredNumberOfSnipers != 0)
     {
-        for (var i = 0; i < desiredNumberOfSnipers; i++)
-        {
-            var randomSniper = GetRandomOperatorFromOperatorPool(sniperOperators);
-
-            PushOperatorIntoPoolOfRolledOperators(randomSniper);
-
-            desiredTeamSize--;
-
-            sniperOperators.splice(completePoolOfOperators.indexOf(randomSniper), 1);
-
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomSniper), 1);
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, sniperOperators);
+        CheckAndAddRandomUnit(desiredNumberOfSnipers, completePoolOfOperators, sniperOperators);
     }
 
     if (desiredNumberOfVanguards != 0)
     {
-        for (var i = 0; i < desiredNumberOfVanguards; i++)
-        {
-            var randomVanguard = GetRandomOperatorFromOperatorPool(vanguardOperators);
-
-            PushOperatorIntoPoolOfRolledOperators(randomVanguard);
-
-            desiredTeamSize--;
-
-            vanguardOperators.splice(completePoolOfOperators.indexOf(randomVanguard), 1);
-
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomVanguard), 1);
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, vanguardOperators);
+        CheckAndAddRandomUnit(desiredNumberOfVanguards, completePoolOfOperators, vanguardOperators);
     }
 
     if (desiredNumberOfSpecialists != 0)
     {
-        for (var i = 0; i < desiredNumberOfSpecialists; i++)
-        {
-            var randomSpecialist = GetRandomOperatorFromOperatorPool(specialistOperators);
-
-            PushOperatorIntoPoolOfRolledOperators(randomSpecialist);
-
-            desiredTeamSize--;
-
-            specialistOperators.splice(completePoolOfOperators.indexOf(randomSpecialist), 1);
-
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomSpecialist), 1);
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, specialistOperators);
+        CheckAndAddRandomUnit(desiredNumberOfSpecialists, completePoolOfOperators, specialistOperators);
     }
 
     if (desiredNumberOfDefenders != 0)
     {
-        for (var i = 0; i < desiredNumberOfDefenders; i++)
-        {
-            var randomDefender = GetRandomOperatorFromOperatorPool(defenderOperators);
-
-            PushOperatorIntoPoolOfRolledOperators(randomDefender);
-
-            desiredTeamSize--;
-
-            defenderOperators.splice(completePoolOfOperators.indexOf(randomDefender), 1);
-
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomDefender), 1);
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, defenderOperators);
+        CheckAndAddRandomUnit(desiredNumberOfDefenders, completePoolOfOperators, defenderOperators);
     }
 
     if (desiredNumberOfGuards != 0)
     {
-        for (var i = 0; i < desiredNumberOfGuards; i++)
-        {
-            var randomGuard = GetRandomOperatorFromOperatorPool(guardOperators);
-
-            PushOperatorIntoPoolOfRolledOperators(randomGuard);
-
-            desiredTeamSize--;
-
-            guardOperators.splice(completePoolOfOperators.indexOf(randomGuard), 1);
-
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomGuard), 1);
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, guardOperators);
+        CheckAndAddRandomUnit(desiredNumberOfGuards, completePoolOfOperators, guardOperators);
     }
 
     if (desiredNumberOfCasters != 0)
     {
-        for (var i = 0; i < desiredNumberOfCasters; i++)
-        {
-            var randomCaster = GetRandomOperatorFromOperatorPool(casterOperators);
-
-            PushOperatorIntoPoolOfRolledOperators(randomCaster);
-
-            desiredTeamSize--;
-
-            casterOperators.splice(completePoolOfOperators.indexOf(randomCaster), 1);
-
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomCaster), 1);
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, casterOperators);
+        CheckAndAddRandomUnit(desiredNumberOfCasters, completePoolOfOperators, casterOperators);
     }
     
     

@@ -119,32 +119,34 @@ rollATeamButton.onclick = function()
 
     if (desiredNumberOfMedics != 0)
     {
-        for (var i = 0; i < desiredNumberOfMedics; i++)
-        {
-            var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
+        CheckAndAddRandomUnit(desiredNumberOfMedics, completePoolOfOperators, medicOperators);
 
+        // for (var i = 0; i < desiredNumberOfMedics; i++)
+        // {
+        //     var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
 
-            for (var y = 0; y < completePoolOfOperators.length; y++)
-            {
+        //     for (var y = 0; y < completePoolOfOperators.length; y++)
+        //     {
 
-                if (completePoolOfOperators[y] == randomMedic)
-                {
-                    PushOperatorIntoPoolOfRolledOperators(randomMedic);
+        //         if (completePoolOfOperators[y] == randomMedic)
+        //         {
+        //             PushOperatorIntoPoolOfRolledOperators(randomMedic);
 
-                    desiredTeamSize--;
+        //             desiredTeamSize--;
 
-                    medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+        //             medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
 
-                    completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+        //             completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+        //         }
+        //     }
+        // }
 
-                }
-
-            }
-            
-        }
-
-        completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
+        // completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
     }
+
+    
+
+    
 
     if (desiredNumberOfSupporters != 0)
     {
@@ -305,6 +307,37 @@ rollATeamButton.onclick = function()
 
 
 // UTILITY FUNCTIONS
+
+
+function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst, classPoolToSpliceOperatorFrom)
+    {
+        for (var i = 0; i < desiredUnitAmount; i++)
+        {
+            var randomUnit = GetRandomOperatorFromOperatorPool(classPoolToSpliceOperatorFrom);
+
+            for (var y = 0; y < poolOfOperatorsToCheckAgainst.length; y++)
+            {
+
+                if (poolOfOperatorsToCheckAgainst[y] == randomUnit)
+                {
+                    PushOperatorIntoPoolOfRolledOperators(randomUnit);
+
+                    desiredTeamSize--;
+
+                    classPoolToSpliceOperatorFrom.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
+
+                    poolOfOperatorsToCheckAgainst.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
+                }
+            }
+        }
+
+        poolOfOperatorsToCheckAgainst = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
+
+        // For lack of a better name, this function draws a random operator from any given class,
+        // checks to see if said operator hasn't been filtered out of the complete pool of operators.
+        // If they haven't been filtered, add said operator to the list of rolled operators,
+        // and remove them from the complete pool + class pool as to not roll them again.
+    }
 
 function SpliceAnEntireClassOutOfOperatorPool(poolToSplice, classToSpliceOut)
     {

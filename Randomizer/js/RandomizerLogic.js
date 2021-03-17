@@ -26,12 +26,18 @@ var casterOperatorsDefault = ["Tomimi", "Beeswax", "Click", "Leonhardt", "Absint
 
 var listOfThingsToFilterPoolWith = [];
 
-var oneStarOperators = ["THRM-EX", "Castle-3", "Lancet-2"];
-var twoStarOperators = ["12F", "Durin", "Rangers", "Noir Corne", "Yato"];
-var threeStarOperators = ["Spot", "Popukar", "Midnight", "Catapult", "Orchid", "Steward", "Ansel", "Hibiscus", "Lava", "Adnachiel", "Kroos", "Beagle", "Cardigan", "Melantha", "Plume", "Vanilla", "Fang"];
-var fourStarOperators = ["Aciddrop", "Estelle", "Jaye", "Click", "Podenco", "Cutter", "Utage", "Ambriel", "May", "Ethan", "Dur-nar", "Vermeil", "Myrtle", "Sussurro", "Greyy", "Beehunter", "Shaw", "Earthspirit", "Deepcolor", "Gummy", "Cuora", "Matterhorn", "Perfumer", "Gavial", "Myrrh", "Rope", "Gravel", "Mousse", "Frostleaf", "Matoimaru", "Dobermann", "Vigna", "Scavenger", "Courier", "Shirayuki", "Meteor", "Jessica", "Gitano", "Haze"];
-var fiveStarOperators = ["Flint", "Tomimi", "Scene", "Andreana", "Chiave", "Beeswax", "Ayerscarpe", "Folinic", "Leonhardt", "Absinthe", "Tsukinogi", "Asbestos", "Elysium", "Shamare", "Sideroca", "Sesa", "Bibeak", "Leizi", "Hung", "Snowsant", "GreyThroat", "Broca", "Reed", "Bison", "Waai Fu", "Ceylon", "Flamebringer", "Breeze", "Executor", "Astesia", "Glaucus", "Swire", "Grani", "Nightmare", "Savage", "FEater", "Manticore", "Sora", "Istina", "Pramanix", "Cliffheart", "Firewatch", "Provence", "Vulcan", "Croissant", "Liskarm", "Projekt Red", "Nearl", "Warfarin", "Silence", "Mayer", "Skyfire", "Amiya", "Meteorite", "Platinum", "Blue Poison", "Specter", "Lappland", "Indra", "Franka", "Texas", "Zima", "Ptilopsis"];
-var sixStarOperators = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", "W", "Phantom", "Bagpipe", "Ceobe", "Nian", "Aak", "Blaze", "Mostima", "Magallan", "Hellagur", "Schwarz", "Ch'en", "Skadi", "SilverAsh", "Saria", "Hoshiguma", "Nightingale", "Shining", "Angelina", "Eyjafjalla", "Ifrit", "Siege", "Exusiai"];
+var oneStarOperators = [];
+var oneStarOperatorsDefault = ["THRM-EX", "Castle-3", "Lancet-2"];
+var twoStarOperators = [];
+var twoStarOperatorsDefault = ["12F", "Durin", "Rangers", "Noir Corne", "Yato"];
+var threeStarOperators = [];
+var threeStarOperatorsDefault = ["Spot", "Popukar", "Midnight", "Catapult", "Orchid", "Steward", "Ansel", "Hibiscus", "Lava", "Adnachiel", "Kroos", "Beagle", "Cardigan", "Melantha", "Plume", "Vanilla", "Fang"];
+var fourStarOperators = [];
+var fourStarOperatorsDefault = ["Aciddrop", "Estelle", "Jaye", "Click", "Podenco", "Cutter", "Utage", "Ambriel", "May", "Ethan", "Dur-nar", "Vermeil", "Myrtle", "Sussurro", "Greyy", "Beehunter", "Shaw", "Earthspirit", "Deepcolor", "Gummy", "Cuora", "Matterhorn", "Perfumer", "Gavial", "Myrrh", "Rope", "Gravel", "Mousse", "Frostleaf", "Matoimaru", "Dobermann", "Vigna", "Scavenger", "Courier", "Shirayuki", "Meteor", "Jessica", "Gitano", "Haze"];
+var fiveStarOperators = [];
+var fiveStarOperatorsDefault = ["Flint", "Tomimi", "Scene", "Andreana", "Chiave", "Beeswax", "Ayerscarpe", "Folinic", "Leonhardt", "Absinthe", "Tsukinogi", "Asbestos", "Elysium", "Shamare", "Sideroca", "Sesa", "Bibeak", "Leizi", "Hung", "Snowsant", "GreyThroat", "Broca", "Reed", "Bison", "Waai Fu", "Ceylon", "Flamebringer", "Breeze", "Executor", "Astesia", "Glaucus", "Swire", "Grani", "Nightmare", "Savage", "FEater", "Manticore", "Sora", "Istina", "Pramanix", "Cliffheart", "Firewatch", "Provence", "Vulcan", "Croissant", "Liskarm", "Projekt Red", "Nearl", "Warfarin", "Silence", "Mayer", "Skyfire", "Amiya", "Meteorite", "Platinum", "Blue Poison", "Specter", "Lappland", "Indra", "Franka", "Texas", "Zima", "Ptilopsis"];
+var sixStarOperators = [];
+var sixStarOperatorsDefault = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", "W", "Phantom", "Bagpipe", "Ceobe", "Nian", "Aak", "Blaze", "Mostima", "Magallan", "Hellagur", "Schwarz", "Ch'en", "Skadi", "SilverAsh", "Saria", "Hoshiguma", "Nightingale", "Shining", "Angelina", "Eyjafjalla", "Ifrit", "Siege", "Exusiai"];
 
 var desiredTeamSize;
 
@@ -220,6 +226,8 @@ function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst,
         // checks to see if said operator hasn't been filtered out of the complete pool of operators.
         // If they haven't been filtered, add said operator to the list of rolled operators,
         // and remove them from the complete pool + class pool as to not roll them again.
+        // I begrudgingly add this comment because the convenience of having this multi-headed function
+        // exceeds the drawbacks of having to repeat the code instead.
     }
 
 function SpliceAnEntireClassOutOfOperatorPool(poolToSplice, classToSpliceOut)
@@ -269,6 +277,12 @@ function ResetEveryPoolOfOperatorsToDefault()
     defenderOperators = ResetPoolOfOperatorsToDefault(defenderOperatorsDefault);
     guardOperators = ResetPoolOfOperatorsToDefault(guardOperatorsDefault);
     casterOperators = ResetPoolOfOperatorsToDefault(casterOperatorsDefault);
+    oneStarOperators = ResetPoolOfOperatorsToDefault(oneStarOperatorsDefault);
+    twoStarOperators = ResetPoolOfOperatorsToDefault(twoStarOperatorsDefault);
+    threeStarOperators = ResetPoolOfOperatorsToDefault(threeStarOperatorsDefault);
+    fourStarOperators = ResetPoolOfOperatorsToDefault(fourStarOperatorsDefault);
+    fiveStarOperators = ResetPoolOfOperatorsToDefault(fiveStarOperatorsDefault);
+    sixStarOperators = ResetPoolOfOperatorsToDefault(sixStarOperatorsDefault);
 }
 
 function PushOperatorIntoPoolOfRolledOperators(operator)

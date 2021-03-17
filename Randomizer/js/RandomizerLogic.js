@@ -123,13 +123,24 @@ rollATeamButton.onclick = function()
         {
             var randomMedic = GetRandomOperatorFromOperatorPool(medicOperators);
 
-            PushOperatorIntoPoolOfRolledOperators(randomMedic);
 
-            desiredTeamSize--;
+            for (var y = 0; y < completePoolOfOperators.length; y++)
+            {
 
-            medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+                if (completePoolOfOperators[y] == randomMedic)
+                {
+                    PushOperatorIntoPoolOfRolledOperators(randomMedic);
 
-            completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+                    desiredTeamSize--;
+
+                    medicOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+
+                    completePoolOfOperators.splice(completePoolOfOperators.indexOf(randomMedic), 1);
+
+                }
+
+            }
+            
         }
 
         completePoolofOperators = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);

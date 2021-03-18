@@ -111,6 +111,9 @@ for (var i = 0; i < userPoolOfOperators.length; i++)
     }
 }
 
+completePoolOfOperators = userPoolOfOperators;
+completePoolOfOperatorsDefault = completePoolOfOperators;
+
 
 
 

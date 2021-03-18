@@ -376,29 +376,11 @@ function CreateDummyCheckbox(operatorName)
 
     var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
 
-    var isFirefox = navigator.appName;
+    dummyCheckboxClone.childNodes[0].outerText = operatorName;
 
-    if (isFirefox == "Mozilla Firefox")
-    {
-        dummyCheckboxClone.childNodes[1].outerText = operatorName;
+    dummyCheckboxClone.childNodes[1].value = operatorName;
 
-        dummyCheckboxClone.childNodes[2].value = operatorName;
-
-        document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
-
-    }
-
-    else
-    {
-        dummyCheckboxClone.childNodes[0].outerText = operatorName;
-
-        dummyCheckboxClone.childNodes[1].value = operatorName;
-
-        document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
-
-    }
-
-    
+    document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
 
 }
 

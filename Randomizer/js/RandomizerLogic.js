@@ -375,13 +375,19 @@ function CreateDummyCheckbox(operatorName)
     var dummyCheckbox = document.getElementById("dummyCheckbox");
 
     var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
+    
+    for (var i = 0; i < dummyCheckboxClone.childNodes.length; i++)
+    {
+        if (dummyCheckboxClone.childNodes[i].outerText)
+        {
+            dummyCheckboxClone.childNodes[i].outerText = operatorName;
+        }
 
-    console.log(dummyCheckboxClone.childNodes[0]);
-    console.log(dummyCheckboxClone.childNodes[1]);
-
-    dummyCheckboxClone.childNodes[0].outerText = operatorName;
-
-    dummyCheckboxClone.childNodes[1].value = operatorName;
+        else if (dummyCheckboxClone.childNodes[i].value)
+        {
+            dummyCheckboxClone.childNodes[i].value = operatorName;
+        }
+    }
 
     document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
 

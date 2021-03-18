@@ -375,6 +375,11 @@ function CreateDummyCheckbox(operatorName)
     var dummyCheckbox = document.getElementById("dummyCheckbox");
 
     var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
+
+    for (var i = 0; i < dummyCheckboxClone.childNodes.length; i++)
+    {
+        console.log(dummyCheckboxClone.childNodes)
+    }
     
     for (var i = 0; i < dummyCheckboxClone.childNodes.length; i++)
     {

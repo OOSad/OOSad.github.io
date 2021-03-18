@@ -380,15 +380,16 @@ function CreateDummyCheckbox(operatorName)
     {
         console.log(dummyCheckboxClone.childNodes)
     }
+
+    dummyCheckboxClone.childNodes[0].textContent = operatorName;
+    //dummyCheckboxClone.getElementById("UserOperatorLabel").textContent = operatorName;
+
     
     for (var i = 0; i < dummyCheckboxClone.childNodes.length; i++)
     {
-        if (dummyCheckboxClone.childNodes[i].outerText)
-        {
-            dummyCheckboxClone.childNodes[i].outerText = operatorName;
-        }
 
-        else if (dummyCheckboxClone.childNodes[i].value)
+
+        if (dummyCheckboxClone.childNodes[i].value)
         {
             dummyCheckboxClone.childNodes[i].value = operatorName;
         }

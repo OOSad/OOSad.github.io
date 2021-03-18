@@ -376,6 +376,9 @@ function CreateDummyCheckbox(operatorName)
 
     var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
 
+    console.log(dummyCheckboxClone.childNodes[0]);
+    console.log(dummyCheckboxClone.childNodes[1]);
+
     dummyCheckboxClone.childNodes[0].outerText = operatorName;
 
     dummyCheckboxClone.childNodes[1].value = operatorName;

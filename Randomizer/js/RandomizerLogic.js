@@ -384,34 +384,7 @@ function CreateDummyCheckbox(operatorName)
 
 
 
-function AddCheckedOperatorsToArray(callerCheckbox)
-{
-    if (callerCheckbox.checked)
-    {
-        userPoolOfOperators.push(callerCheckbox.value);
-    }
 
-    if (!callerCheckbox.checked)
-    {
-        userPoolOfOperators.splice(userPoolOfOperators.indexOf(callerCheckbox.value), 1);
-    }
-
-    WriteUserOperatorsArrayToFile(userPoolOfOperators);
-}
-
-
-
-function WriteUserOperatorsArrayToFile(userOperators)
-{
-    localStorage.setItem("UserOps", JSON.stringify(userOperators));
-}
-
-
-
-function ClearUserOperatorsFile(userOperators)
-{
-    userOperators = [];
-}
 
 
 
@@ -642,11 +615,14 @@ function FilterOutIndividualPoolOfMaps(stagesToFilter)
 
 function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
 {
+    userPoolOfOperators = EmptyList();
+
     if (callerCheckbox.checked)
     {
         for (var i = 0; i < userOperatorCheckboxes.length; i++)
         {
             userOperatorCheckboxes[i].checked = true;
+            AddCheckedOperatorsToArray(userOperatorCheckboxes[i]);
         }
     }
 
@@ -655,6 +631,37 @@ function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
         for (var i = 0; i < userOperatorCheckboxes.length; i++)
         {
             userOperatorCheckboxes[i].checked = false;
+            AddCheckedOperatorsToArray(userOperatorCheckboxes[i]);
+
         }
     }
+}
+
+function AddCheckedOperatorsToArray(callerCheckbox)
+{
+    if (callerCheckbox.checked)
+    {
+        userPoolOfOperators.push(callerCheckbox.value);
+    }
+
+    if (!callerCheckbox.checked)
+    {
+        userPoolOfOperators.splice(userPoolOfOperators.indexOf(callerCheckbox.value), 1);
+    }
+
+    WriteUserOperatorsArrayToFile(userPoolOfOperators);
+}
+
+
+
+function WriteUserOperatorsArrayToFile(userOperators)
+{
+    localStorage.setItem("UserOps", JSON.stringify(userOperators));
+}
+
+
+
+function ClearUserOperatorsFile(userOperators)
+{
+    userOperators = [];
 }

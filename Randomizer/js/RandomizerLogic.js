@@ -646,7 +646,7 @@ function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
     {
         for (var i = 0; i < userOperatorCheckboxes.length; i++)
         {
-            userOperatorCheckboxes[i].setAttribute("checked", "true");
+            userOperatorCheckboxes[i].checked = true;
         }
     }
 
@@ -654,7 +654,7 @@ function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
     {
         for (var i = 0; i < userOperatorCheckboxes.length; i++)
         {
-            userOperatorCheckboxes[i].setAttribute("checked", "false");
+            userOperatorCheckboxes[i].checked = false;
         }
     }
 }

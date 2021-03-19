@@ -70,6 +70,7 @@
   {
     display: flex;
     justify-content: space-evenly;
+    font-size: 150%;
   }
   
   #dummyCheckbox:not(:first-child) #UserOperatorLabel, 

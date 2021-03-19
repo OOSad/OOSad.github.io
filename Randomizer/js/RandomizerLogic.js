@@ -143,8 +143,6 @@ completePoolOfOperatorsDefault = completePoolOfOperators;
 
 rollATeamButton.onclick = function()
 {
-    console.clear();
-    
     rolledPoolOfOperators = EmptyList();
 
     ResetEveryPoolOfOperatorsToDefault();
@@ -217,11 +215,11 @@ rollATeamButton.onclick = function()
 
 
 // Same idea of rolling ops, but this time for rolling a stage instead.
+// For now, pictures are grabbed from a local folder. 
+// Is there a website I could grab these from instead, just like we do for operator icons?
 
 rollAStageButton.onclick = function()
 {
-    console.clear();
-
     completePoolOfStages = ResetPoolOfOperatorsToDefault(completePoolOfStagesDefault);
      
     FilterMapPoolBasedOnPreferences(chaptersToFilterOut);
@@ -229,6 +227,12 @@ rollAStageButton.onclick = function()
     var selectedMap = GetRandomOperatorFromOperatorPool(completePoolOfStages);
 
     document.getElementById("StageLabel").textContent = selectedMap;
+
+    var currentStagePicture = document.getElementById("StageIcon");
+
+    var localPathToStagePicture = 'StageIcons/' + selectedMap + '_map.png';
+
+    currentStagePicture.src = localPathToStagePicture;
 }
 
 
@@ -429,9 +433,6 @@ function ToggleOperatorClassFromListOfClasses(callerCheckbox)
 
 function FilterOperatorPoolBasedOnPreferences(listOfClasses)
 {
-
-    console.log(listOfThingsToFilterPoolWith);
-
     for (var i = 0; i < listOfClasses.length; i++)
     {
         switch (listOfClasses[i])
@@ -496,8 +497,6 @@ function FilterOperatorPoolBasedOnPreferences(listOfClasses)
             break;
         }
     }
-
-    console.log(completePoolOfOperators);
 }
 
 function FilterOutIndividualClass(operatorsToFilter)
@@ -575,9 +574,6 @@ function ToggleStagePoolFromListOfStages(callerCheckbox)
 
 function FilterMapPoolBasedOnPreferences(listOfChapters)
 {
-
-    console.log(chaptersToFilterOut);
-
     for (var i = 0; i < listOfChapters.length; i++)
     {
         switch (listOfChapters[i])

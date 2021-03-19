@@ -149,7 +149,11 @@ rollATeamButton.onclick = function()
 
     desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
 
+    RemoveDummyCheckboxValueFromListOfOperators(completePoolOfOperators);
+
     FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
+
+    console.log(completePoolOfOperators);
 
 
     if (desiredNumberOfMedics != 0)
@@ -246,6 +250,17 @@ rollAStageButton.onclick = function()
 
 
 // UTILITY FUNCTIONS
+
+function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)
+{
+    for (let i = 0; i < listOfOperators.length; i++)
+    {
+        if (listOfOperators[i] == "on")
+        {
+            listOfOperators.splice(listOfOperators.indexOf("on"), 1);
+        }
+    }
+}
 
 function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst, classPoolToSpliceOperatorFrom)
     {

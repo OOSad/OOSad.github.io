@@ -202,7 +202,6 @@ rollATeamButton.onclick = function()
         PushOperatorIntoPoolOfRolledOperators(selectedOperator);
     }
 
-    rolledPoolOfOperators.sort();
 
     UpdateOperatorLabelsOnPage();
 

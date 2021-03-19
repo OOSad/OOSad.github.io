@@ -79,7 +79,7 @@
   }
 
   #dummyCheckbox._selected {
-    box-shadow: 0 0 3pt 2pt darkblue;
+    box-shadow: 0 0 3pt 2pt  #0098dc;
   }
 
   #dummyCheckbox img {

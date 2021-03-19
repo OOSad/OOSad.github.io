@@ -124,6 +124,7 @@ for (var i = 0; i < userPoolOfOperators.length; i++)
         }
     }
 }
+
 updateSelectedState();
 
 completePoolOfOperators = userPoolOfOperators;

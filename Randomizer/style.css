@@ -1,10 +1,8 @@
-/* The navbar container */
 .topnav {
     overflow: hidden;
     background-color: rgb(19, 19, 19);
   }
   
-  /* Navbar links */
   .topnav a {
     float: left;
     display: block;
@@ -14,7 +12,6 @@
     text-decoration: none;
   }
   
-  /* Links - change color on hover */
   .topnav a:hover {
     background-color: #ddd;
     color: black;
@@ -64,6 +61,7 @@
   {
     display: flex;
     justify-content: space-evenly;
+    margin: 25px;
   }
 
   #FiltersDiv
@@ -71,6 +69,8 @@
     display: flex;
     justify-content: space-evenly;
     font-size: 150%;
+    margin: 25px;
+    
   }
   
   #dummyCheckbox:not(:first-child) #UserOperatorLabel, 

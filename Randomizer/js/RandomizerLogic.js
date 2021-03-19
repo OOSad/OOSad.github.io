@@ -92,6 +92,10 @@ updateSelectedState = function()
     }
 }
 
+
+
+
+
 // Create and initialize things that keep track of operators user has.
 
 for (var i = 0; i < completePoolOfOperatorsDefault.length; i++)

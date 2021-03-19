@@ -38,7 +38,7 @@ var fiveStarOperators = [];
 var fiveStarOperatorsDefault = ["Flint", "Tomimi", "Scene", "Andreana", "Chiave", "Beeswax", "Ayerscarpe", "Folinic", "Leonhardt", "Absinthe", "Tsukinogi", "Asbestos", "Elysium", "Shamare", "Sideroca", "Sesa", "Bibeak", "Leizi", "Hung", "Snowsant", "GreyThroat", "Broca", "Reed", "Bison", "Waai Fu", "Ceylon", "Flamebringer", "Breeze", "Executor", "Astesia", "Glaucus", "Swire", "Grani", "Nightmare", "Savage", "FEater", "Manticore", "Sora", "Istina", "Pramanix", "Cliffheart", "Firewatch", "Provence", "Vulcan", "Croissant", "Liskarm", "Projekt Red", "Nearl", "Warfarin", "Silence", "Mayer", "Skyfire", "Amiya", "Meteorite", "Platinum", "Blue Poison", "Specter", "Lappland", "Indra", "Franka", "Texas", "Zima", "Ptilopsis"];
 var sixStarOperators = [];
 var sixStarOperatorsDefault = ["Eunectes", "Thorns", "Suzuran", "Rosa(Poca)", "Weedy", "W", "Phantom", "Bagpipe", "Ceobe", "Nian", "Aak", "Blaze", "Mostima", "Magallan", "Hellagur", "Schwarz", "Ch'en", "Skadi", "SilverAsh", "Saria", "Hoshiguma", "Nightingale", "Shining", "Angelina", "Eyjafjalla", "Ifrit", "Siege", "Exusiai"];
-
+var charIdMap = {"Lancet-2": "char_285_medic2","Castle-3": "char_286_cast3","THRM-EX": "char_376_therex","Yato": "char_502_nblade","Noir Corne": "char_500_noirc","Rangers": "char_503_rang","Durin": "char_501_durin","12F": "char_009_12fce","Fang": "char_123_fang","Vanilla": "char_240_wyvern","Reserve Operator - Melee": "char_504_rguard","Plume": "char_192_falco","Melantha": "char_208_melan","Popukar": "char_281_popka","Cardigan": "char_209_ardign","Beagle": "char_122_beagle","Spot": "char_284_spot","Kroos": "char_124_kroos","Adnachiel": "char_211_adnach","Reserve Operator - Sniper": "char_507_rsnipe","Lava": "char_121_lava","Hibiscus": "char_120_hibisc","Ansel": "char_212_ansel","Reserve Operator - Logistics": "char_506_rmedic","Steward": "char_210_stward","Reserve Operator - Caster": "char_505_rcast","Orchid": "char_278_orchid","Haze": "char_141_nights","Gitano": "char_109_fmout","Greyy": "char_253_greyy","Click": "char_328_cammou","Jessica": "char_235_jesica","Meteor": "char_126_shotst","Vermeil": "char_190_clour","May": "char_133_mm","Shirayuki": "char_118_yuki","Ambriel": "char_302_glaze","Aciddrop": "char_366_acdrop","Courier": "char_198_blackd","Scavenger": "char_149_scave","Vigna": "char_290_vigna","Myrtle": "char_151_myrtle","Dobermann": "char_130_doberm","Matoimaru": "char_289_gyuki","Frostleaf": "char_193_frostl","Estelle": "char_127_estell","Mousse": "char_185_frncat","Cutter": "char_301_cutter","Utage": "char_337_utage","Gravel": "char_237_gravel","Jaye": "char_272_strong","Rope": "char_236_rope","Myrrh": "char_117_myrrh","Gavial": "char_187_ccheal","Sussurro": "char_298_susuro","Perfumer": "char_181_flower","Matterhorn": "char_199_yak","Cuora": "char_150_snakek","Gummy": "char_196_sunbr","Dur-nar": "char_260_durnar","Deepcolor": "char_110_deepcl","Earthspirit": "char_183_skgoat","Podenco": "char_258_podego","Ethan": "char_355_ethan","Shaw": "char_277_sqrrel","Ptilopsis": "char_128_plosis","Breeze": "char_275_breeze","Zima": "char_115_headbr","Texas": "char_102_texas","Chiave": "char_349_chiave","Reed": "char_261_sddrag","Elysium": "char_401_elysm","Swire": "char_308_swire","Franka": "char_106_franka","Flamebringer": "char_131_flameb","Sharp": "char_508_aguard","Indra": "char_155_tiger","Flint": "char_415_flint","Lappland": "char_140_whitew","Ayerscarpe": "char_294_ayer","Bibeak": "char_252_bibeak","Specter": "char_143_ghost","Broca": "char_356_broca","Astesia": "char_274_astesi","Sideroca": "char_333_sidero","Blue Poison": "char_129_bluep","Platinum": "char_204_platnm","GreyThroat": "char_367_swllow","Stormeye": "char_511_asnipe","Meteorite": "char_219_meteo","Sesa": "char_379_sesa","Executor": "char_279_excu","Amiya": "char_002_amiya","Absinthe": "char_405_absin","Tomimi": "char_411_tomimi","Skyfire": "char_166_skfire","Pith": "char_509_acast","Leizi": "char_306_leizi","Beeswax": "char_344_beewax","Leonhardt": "char_373_lionhd","Mayer": "char_242_otter","Scene": "char_336_folivo","Silence": "char_108_silent","Warfarin": "char_171_bldsk","Folinic": "char_345_folnic","Touch": "char_510_amedic","Ceylon": "char_348_ceylon","Nearl": "char_148_nearl","Hung": "char_226_hmau","Projekt Red": "char_144_red","Waai Fu": "char_243_waaifu","Liskarm": "char_107_liskam","Croissant": "char_201_moeshd","Bison": "char_325_bison","Vulcan": "char_163_hpsts","Asbestos": "char_378_asbest","Provence": "char_145_prove","Firewatch": "char_158_milu","Andreana": "char_218_cuttle","Cliffheart": "char_173_slchan","Snowsant": "char_383_snsant","Pramanix": "char_174_slbell","Shamare": "char_254_vodfox","Istina": "char_195_glassb","Glaucus": "char_326_glacus","Sora": "char_101_sora","Tsukinogi": "char_343_tknogi","Manticore": "char_215_mantic","FEater": "char_241_panda","Exusiai": "char_103_angel","Schwarz": "char_340_shwaz","W": "char_113_cqbw","Rosa(Poca)": "char_197_poca","Siege": "char_112_siege","Bagpipe": "char_222_bpipe","Ifrit": "char_134_ifrit","Mostima": "char_213_mostma","Eyjafjalla": "char_180_amgoat","Ceobe": "char_2013_cerber","Angelina": "char_291_aglina","Suzuran": "char_358_lisa","Magallan": "char_248_mgllan","Phantom": "char_250_phatom","Weedy": "char_400_weedy","Aak": "char_225_haak","Shining": "char_147_shining","Nightingale": "char_179_cgbird","Hoshiguma": "char_136_hsguma","Saria": "char_202_demkni","Nian": "char_2014_nian","Eunectes": "char_416_zumama","SilverAsh": "char_172_svrash","Thorns": "char_293_thorns","Ch'en": "char_010_chen","Blaze": "char_017_huang","Hellagur": "char_188_helage","Medic Drone": "token_10000_silent_healrb","Tentacle": "token_10001_deepcl_tentac","Mirage": "token_10003_cgbird_bird","Robotter": "token_10004_otter_motter","Soaring Dragon F": "token_10005_mgllan_drone1","Soaring Dragon L": "token_10005_mgllan_drone2","Soaring Dragon A": "token_10005_mgllan_drone3","Cursed Doll": "token_10006_vodfox_doll","Phantom in the Mirror": "token_10007_phatom_twin","Front Toward Enemy": "token_10008_cqbw_box","Industrial Reserve Water Cannon": "token_10009_weedy_cannon","Mobile Buggy Cam": "token_10010_folivo_car","Sand Obelisk": "token_10011_beewax_oblisk","Roadblock": "trap_001_crate","Stun Generator": "trap_002_emp","Gate": "trap_003_gate","Detector": "trap_005_sensor","Jammer": "trap_006_antidr","Turret": "trap_007_ballis","Command Terminal": "trap_008_farm","Portable Supply Station": "trap_009_battery","Originium Ice Crystal": "trap_010_frosts","Originium Altar": "trap_011_ore","Interference Mine": "trap_012_mine","Originium Flow Generator": "trap_013_blower","L-44 \"Gramophone\"": "trap_014_tower","Giant Mushroom": "trap_015_tree","Temporary Rhodes Island Employee": "trap_016_peon","Savage": "char_230_savage","Catapult": "char_282_catap","Midnight": "char_283_midn","Beehunter": "char_137_brownb","Nightmare": "char_164_nightm","Grani": "char_220_grani","Skadi": "char_263_skadi"};
 var desiredTeamSize;
 
 var desiredNumberOfMedics = 0;
@@ -77,6 +77,20 @@ var rollAStageButton = document.getElementById("RollAStageButton");
 
 
 
+updateSelectedState = function()
+{
+    for (var i = 0; i < userOperatorCheckboxes.length; i++)
+    {
+        if (userOperatorCheckboxes[i].checked)
+        {
+            userOperatorCheckboxes[i].parentElement.classList.add('_selected');
+        }
+        else
+        {
+            userOperatorCheckboxes[i].parentElement.classList.remove('_selected');
+        }
+    }
+}
 
 // Create and initialize things that keep track of operators user has.
 
@@ -106,6 +120,7 @@ for (var i = 0; i < userPoolOfOperators.length; i++)
         }
     }
 }
+updateSelectedState();
 
 completePoolOfOperators = userPoolOfOperators;
 completePoolOfOperatorsDefault = completePoolOfOperators;
@@ -350,6 +365,12 @@ function UpdateOperatorLabelsOnPage()
     for (var i = 0; i < operatorLabels.length; i++)
     {
         operatorLabels[i].textContent = rolledPoolOfOperators[i];
+        let im = document.createElement('img');
+        im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[rolledPoolOfOperators[i]] + '.png';
+        if (charIdMap[rolledPoolOfOperators[i]])
+        {
+            operatorLabels[i].appendChild(im);
+        }
     }
 }
 
@@ -365,8 +386,15 @@ function CreateDummyCheckbox(operatorName)
     dummyCheckboxClone.childNodes[0].onclick = null;
     dummyCheckboxClone.childNodes[1].value = operatorName;
 
-
-
+    dummyCheckboxClone.childNodes[1].addEventListener("change", () => dummyCheckboxClone.classList.toggle('_selected'));
+    dummyCheckboxClone.onclick = () => dummyCheckboxClone.childNodes[1].click();
+    let im = document.createElement('img');
+    im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[operatorName] + '.png';
+    if (charIdMap[operatorName])
+    {
+        dummyCheckboxClone.appendChild(im);
+    }
+    
     document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
 
 }
@@ -625,6 +653,7 @@ function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
 
         }
     }
+    updateSelectedState();
 }
 
 function AddCheckedOperatorsToArray(callerCheckbox)

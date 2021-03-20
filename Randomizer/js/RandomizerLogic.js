@@ -68,6 +68,7 @@ var chaptersToFilterOut = [];
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
 var rollAStageButton = document.getElementById("RollAStageButton");
+var sortAlphabeticallyButton = document.getElementById("SortAlphabeticallyButton");
 
 
 
@@ -212,7 +213,11 @@ rollATeamButton.onclick = function()
 }
 
 
-
+sortAlphabeticallyButton.onclick = function()
+{
+    rolledPoolOfOperators.sort();
+    UpdateOperatorLabelsOnPage();
+}
 
 
 

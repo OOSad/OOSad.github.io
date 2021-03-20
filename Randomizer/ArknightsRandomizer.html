@@ -10,13 +10,13 @@
 </div>
 
 <body>
-    <h2>Operator Roster</h2>   
+    <h2 class="TitleHeader">Operator Roster</h2>   
     <div id="checkboxesDiv"><div id="dummyCheckbox"><label for="UserOperatorCheckbox" id="UserOperatorLabel">Check All</label><input type="checkbox" id="UserOperatorCheckbox" class="UserOperatorCheckbox" onchange="AddCheckedOperatorsToArray(this)"></input></div></div>
     
 
     <div id="OpRollingAreaDiv">
         <div class="OpRollingAreaRow">
-            <h2>Operator Squad</h2>
+            <h2 class="TitleHeader">Operator Squad</h2>
             <h3 class="OpRollingAreaColumn">Op1</h3>
             <h3 class="OpRollingAreaColumn">Op2</h3>
             <h3 class="OpRollingAreaColumn">Op3</h3>
@@ -31,7 +31,7 @@
             <h3 class="OpRollingAreaColumn">Op12</h3>
         </div>
         <div>
-            <h2>Stage </h2>
+            <h2 class="TitleHeader">Stage</h2>
             <h3 id="StageLabel">STAGE</h3>
             <img id="StageIcon" src= "https://aceship.github.io/AN-EN-Tags/img/avg/backgrounds/bg_barracks.png" width="1000" height="500">
         </div>
@@ -44,9 +44,10 @@
         <button id="RollAStageButton">Roll A Stage</button>
     </div>
 
+
     <div id="FiltersDiv">
         <div id="IncludedClassesDiv">
-        Classes To Include: 
+        <label>Classes To Include: </label>
         <div class="IncludedClassCheckbox">
             <input type="checkbox" id="MedicClassCheckbox" value="Medics" checked onchange="ToggleOperatorClassFromListOfClasses(this)">
             <label for="MedicClassCheckbox">Medics</label>
@@ -82,7 +83,7 @@
     </div>
 
     <div id="IncludedRaritiesDiv">
-        Rarities To Include: 
+        <label>Rarities To Include: </label>
         <div class="IncludedRarityCheckbox">
             <input type="checkbox" id="OneStarCheckbox" value="OneStar" checked onchange="ToggleOperatorClassFromListOfClasses(this)">
             <label for="OneStarCheckbox">*1</label>
@@ -111,7 +112,7 @@
         
     </div>
     <div id="MinimumNumberIncludedDiv">
-        Include At Least:
+        <label>Include At Least: </label>
         <div>
             <input type="number" id="IncludeFieldMedics" min="0" max="12" onchange="UpdateDesiredNumberOfMedics(this)"><label for="IncludeFieldMedics"> Medic(s)</label>
         </div>
@@ -139,7 +140,7 @@
     </div>
 
     <div id="IncludedStagesDiv">
-        Stages To Include: 
+        <label>Stages To Include: </label>
         <div class="IncludedStageCheckbox">
             <input type="checkbox" id="chapterPrologueCheckbox" value="Prologue" checked onchange="ToggleStagePoolFromListOfStages(this)">
             <label for="chapterPrologueCheckbox">Prologue</label>

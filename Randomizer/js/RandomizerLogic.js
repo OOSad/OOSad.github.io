@@ -95,6 +95,19 @@ updateSelectedState = function()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Create and initialize things that keep track of operators user has.
 
 {
@@ -137,19 +150,28 @@ updateSelectedState = function()
 
 
 
-// If the user hits the roll a team button, reset the involved lists, select random ops and update the labels on the page.
-// If the user wants a specific number of operators from a certain class, then add those to the final list of ops first.
+
+
+
+
+
+
+
+
+
+// Rolling Operators
+// If the user hits the roll a team button, reset the involved lists, select random operators and update the labels on the page.
+// If the user wants a specific number of operators from a certain class, then add those to the list of rolled operators first.
 
 rollATeamButton.onclick = function()
 {
     ResetALotOfPoolsToDefaultAtTheSameTime();
 
-    desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
-
     RemoveDummyCheckboxValueFromListOfOperators(completePoolOfOperators);
 
-    FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
+    FilterCompletePoolOfOperatorsBasedOnFilteringPreferences(listOfThingsToFilterPoolWith);
 
+    desiredTeamSize = FetchDesiredTeamSize();
 
     if (desiredNumberOfMedics != 0)
     {
@@ -191,7 +213,7 @@ rollATeamButton.onclick = function()
         CheckAndAddRandomUnit(desiredNumberOfCasters, completePoolOfOperators, casterOperators);
     }
     
-    
+
     for (var i = 0; i < desiredTeamSize; i++)
     {
         var selectedOperator = GetRandomItemFromPool(completePoolOfOperators);
@@ -203,7 +225,6 @@ rollATeamButton.onclick = function()
 
 
     UpdateOperatorLabelsOnPage();
-
 }
 
 
@@ -218,7 +239,18 @@ sortAlphabeticallyButton.onclick = function()
 
 
 
-// Same idea of rolling ops, but this time for rolling a stage instead.
+
+
+
+
+
+
+
+
+
+
+
+// Rolling For Stages
 // For now, pictures are grabbed from a local folder. 
 // Is there a website I could grab these from instead, just like we do for operator icons?
 
@@ -243,12 +275,42 @@ rollAStageButton.onclick = function()
 
 
 
-// UTILITY FUNCTIONS
 
 
 
 
-function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)
+
+
+
+
+
+
+// Functions, used throughout the program.
+
+function CreateDummyCheckbox(operatorName)
+{
+    var dummyCheckbox = document.getElementById("dummyCheckbox");
+
+    var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
+
+    dummyCheckboxClone.childNodes[0].textContent = operatorName;
+    dummyCheckboxClone.childNodes[0].onclick = null;
+    dummyCheckboxClone.childNodes[1].value = operatorName;
+
+    dummyCheckboxClone.childNodes[1].addEventListener("change", () => dummyCheckboxClone.classList.toggle('_selected'));
+    dummyCheckboxClone.onclick = () => dummyCheckboxClone.childNodes[1].click();
+    let im = document.createElement('img');
+    im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[operatorName] + '.png';
+    if (charIdMap[operatorName])
+    {
+        dummyCheckboxClone.appendChild(im);
+    }
+    
+    document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
+
+}
+
+function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)  
 {
     for (let i = 0; i < listOfOperators.length; i++)
     {
@@ -257,65 +319,10 @@ function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)
             listOfOperators.splice(listOfOperators.indexOf("on"), 1);
         }
     }
+
+    //This function removes the default value of a checkbox (on) from an array.
+    //We don't want this default "on" value to exist in any lists of operators.
 }
-
-function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst, classPoolToSpliceOperatorFrom)
-{
-    var foundUnits = 0;
-
-    while (foundUnits < desiredUnitAmount)
-    {
-        for (var i = foundUnits; i < desiredUnitAmount; i++)
-        {
-            var randomUnit = GetRandomItemFromPool(classPoolToSpliceOperatorFrom);
-
-            for (var y = 0; y < poolOfOperatorsToCheckAgainst.length; y++)
-            {
-                if (poolOfOperatorsToCheckAgainst[y] == randomUnit)
-                {
-                    PushOperatorIntoPoolOfRolledOperators(randomUnit);
-
-                    desiredTeamSize--;
-
-                    classPoolToSpliceOperatorFrom.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
-
-                    poolOfOperatorsToCheckAgainst.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
-                    
-                    foundUnits++;
-                }
-            }
-        }
-    }
-
-    poolOfOperatorsToCheckAgainst = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
-}
-
-
-function SpliceAnEntireClassOutOfOperatorPool(poolToSplice, classToSpliceOut)
-    {
-        for (var i = 0; i < poolToSplice.length; i++)
-        {
-            for (var x = 0; x < classToSpliceOut.length; x++)
-            {
-                if (poolToSplice[i] == classToSpliceOut[x])
-                {
-                    poolToSplice.splice(poolToSplice.indexOf(classToSpliceOut[x]), 1);
-                }
-            }
-        }
-
-        return poolToSplice;
-    }
-
-
-function EmptyList()
-{
-    var listToClearOut = [];
-    return listToClearOut;
-}
-
-
-
 
 function ResetALotOfPoolsToDefaultAtTheSameTime()
 {
@@ -350,104 +357,7 @@ function ResetPoolOfThingsToDefault(poolOfDefaultsGlobal)
     return poolToReset;
 }
 
-
-function PushOperatorIntoPoolOfRolledOperators(operator)
-{
-    rolledPoolOfOperators.push(operator);
-}
-
-
-
-function GetRandomNumber(min, max) 
-{
-    return Math.floor(Math.random() * (max - min) ) + min;
-}
-
-
-
-function GetRandomItemFromPool(poolOfThings)
-{
-    var randomNumber = GetRandomNumber(0, poolOfThings.length);
-
-    return poolOfThings[randomNumber];
-}
-
-
-
-function FetchAllOperatorLabelsOnPage()
-{
-    var operatorLabels = document.getElementsByClassName("OpRollingAreaColumn");
-    return operatorLabels;
-}
-
-
-
-function UpdateOperatorLabelsOnPage()
-{
-    var operatorLabels = FetchAllOperatorLabelsOnPage()
-
-
-    for (var i = 0; i < operatorLabels.length; i++)
-    {
-        operatorLabels[i].textContent = rolledPoolOfOperators[i];
-        let im = document.createElement('img');
-        im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[rolledPoolOfOperators[i]] + '.png';
-        if (charIdMap[rolledPoolOfOperators[i]])
-        {
-            operatorLabels[i].appendChild(im);
-        }
-    }
-}
-
-
-
-function CreateDummyCheckbox(operatorName)
-{
-    var dummyCheckbox = document.getElementById("dummyCheckbox");
-
-    var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
-
-    dummyCheckboxClone.childNodes[0].textContent = operatorName;
-    dummyCheckboxClone.childNodes[0].onclick = null;
-    dummyCheckboxClone.childNodes[1].value = operatorName;
-
-    dummyCheckboxClone.childNodes[1].addEventListener("change", () => dummyCheckboxClone.classList.toggle('_selected'));
-    dummyCheckboxClone.onclick = () => dummyCheckboxClone.childNodes[1].click();
-    let im = document.createElement('img');
-    im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[operatorName] + '.png';
-    if (charIdMap[operatorName])
-    {
-        dummyCheckboxClone.appendChild(im);
-    }
-    
-    document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
-
-}
-
-
-
-
-
-
-
-
-function ToggleOperatorClassFromListOfClasses(callerCheckbox)
-{
-    if (!callerCheckbox.checked)
-    {
-        listOfThingsToFilterPoolWith.push(callerCheckbox.value);
-    }
-
-    else
-    {
-        listOfThingsToFilterPoolWith.splice(listOfThingsToFilterPoolWith.indexOf(callerCheckbox.value), 1);
-    }
-    
-}
-
-
-
-function FilterOperatorPoolBasedOnPreferences(listOfClasses)
+function FilterCompletePoolOfOperatorsBasedOnFilteringPreferences(listOfClasses)
 {
     for (var i = 0; i < listOfClasses.length; i++)
     {
@@ -531,66 +441,92 @@ function FilterOutIndividualClass(operatorsToFilter)
     }
 }
 
-function UpdateDesiredNumberOfMedics(numberOfMedics)
+function FetchDesiredTeamSize()
 {
-    desiredNumberOfMedics = numberOfMedics.value;
+    return document.getElementById("DesiredTeamSizeField").value;
 }
 
-function UpdateDesiredNumberOfSupporters(numberOfSupporters)
+function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst, classPoolToSpliceOperatorFrom)
 {
-    desiredNumberOfSupporters = numberOfSupporters.value;
-}
+    var foundUnits = 0;
 
-function UpdateDesiredNumberOfSnipers(numberOfSnipers)
-{
-    desiredNumberOfSnipers = numberOfSnipers.value;
-}
-
-function UpdateDesiredNumberOfVanguards(numberOfVanguards)
-{
-    desiredNumberOfVanguards = numberOfVanguards.value;
-}
-
-function UpdateDesiredNumberOfSpecialists(numberOfSpecialists)
-{
-    desiredNumberOfSpecialists = numberOfSpecialists.value;
-}
-
-function UpdateDesiredNumberOfDefenders(numberOfDefenders)
-{
-    desiredNumberOfDefenders = numberOfDefenders.value;
-}
-
-function UpdateDesiredNumberOfGuards(numberOfGuards)
-{
-    desiredNumberOfGuards = numberOfGuards.value;
-}
-
-function UpdateDesiredNumberOfCasters(numberOfCasters)
-{
-    desiredNumberOfCasters = numberOfCasters.value;
-}
-
-function UpdateDesiredTeamSize(teamSize)
-{
-    desiredTeamSize = teamSize;
-}
-
-
-
-
-function ToggleStagePoolFromListOfStages(callerCheckbox)
-{
-    if (!callerCheckbox.checked)
+    while (foundUnits < desiredUnitAmount)
     {
-        stagePoolsToFilterOut.push(callerCheckbox.value);
+        for (var i = foundUnits; i < desiredUnitAmount; i++)
+        {
+            var randomUnit = GetRandomItemFromPool(classPoolToSpliceOperatorFrom);
+
+            for (var y = 0; y < poolOfOperatorsToCheckAgainst.length; y++)
+            {
+                if (poolOfOperatorsToCheckAgainst[y] == randomUnit)
+                {
+                    PushOperatorIntoPoolOfRolledOperators(randomUnit);
+
+                    desiredTeamSize--;
+
+                    classPoolToSpliceOperatorFrom.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
+
+                    poolOfOperatorsToCheckAgainst.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
+                    
+                    foundUnits++;
+                }
+            }
+        }
     }
 
-    else
+    poolOfOperatorsToCheckAgainst = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators); //This isn't working properly for some reason.
+}
+
+function GetRandomItemFromPool(poolOfThings)
+{
+    var randomNumber = GetRandomNumber(0, poolOfThings.length);
+
+    return poolOfThings[randomNumber];
+}
+
+function PushOperatorIntoPoolOfRolledOperators(operator)
+{
+    rolledPoolOfOperators.push(operator);
+}
+
+
+function SpliceAnEntireClassOutOfOperatorPool(poolToSplice, classToSpliceOut)
+{
+    for (var i = 0; i < poolToSplice.length; i++)
     {
-        stagePoolsToFilterOut.splice(stagePoolsToFilterOut.indexOf(callerCheckbox.value), 1);
+        for (var x = 0; x < classToSpliceOut.length; x++)
+        {
+            if (poolToSplice[i] == classToSpliceOut[x])
+            {
+                poolToSplice.splice(poolToSplice.indexOf(classToSpliceOut[x]), 1);
+            }
+        }
     }
 
+    return poolToSplice;
+}
+
+function UpdateOperatorLabelsOnPage()
+{
+    var operatorLabels = FetchAllOperatorLabelsOnPage()
+
+
+    for (var i = 0; i < operatorLabels.length; i++)
+    {
+        operatorLabels[i].textContent = rolledPoolOfOperators[i];
+        let im = document.createElement('img');
+        im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[rolledPoolOfOperators[i]] + '.png';
+        if (charIdMap[rolledPoolOfOperators[i]])
+        {
+            operatorLabels[i].appendChild(im);
+        }
+    }
+}
+
+function FetchAllOperatorLabelsOnPage()
+{
+    var operatorLabels = document.getElementsByClassName("OpRollingAreaColumn");
+    return operatorLabels;
 }
 
 function FilterCompletePoolOfStagesBasedOnFilteringPreferences(listOfChapters)
@@ -675,6 +611,7 @@ function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
 
         }
     }
+    
     updateSelectedState();
 }
 
@@ -693,16 +630,96 @@ function AddCheckedOperatorsToArray(callerCheckbox)
     WriteUserOperatorsArrayToFile(userPoolOfOperators);
 }
 
-
-
 function WriteUserOperatorsArrayToFile(userOperators)
 {
     localStorage.setItem("UserOps", JSON.stringify(userOperators));
 }
 
-
-
 function ClearUserOperatorsFile(userOperators)
 {
     userOperators = [];
+}
+
+function EmptyList()
+{
+    var listToClearOut = [];
+    return listToClearOut;
+}
+
+function GetRandomNumber(min, max) 
+{
+    return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+function ToggleOperatorClassFromListOfClasses(callerCheckbox)
+{
+    if (!callerCheckbox.checked)
+    {
+        listOfThingsToFilterPoolWith.push(callerCheckbox.value);
+    }
+
+    else
+    {
+        listOfThingsToFilterPoolWith.splice(listOfThingsToFilterPoolWith.indexOf(callerCheckbox.value), 1);
+    }
+    
+}
+
+function UpdateDesiredNumberOfMedics(numberOfMedics)
+{
+    desiredNumberOfMedics = numberOfMedics.value;
+}
+
+function UpdateDesiredNumberOfSupporters(numberOfSupporters)
+{
+    desiredNumberOfSupporters = numberOfSupporters.value;
+}
+
+function UpdateDesiredNumberOfSnipers(numberOfSnipers)
+{
+    desiredNumberOfSnipers = numberOfSnipers.value;
+}
+
+function UpdateDesiredNumberOfVanguards(numberOfVanguards)
+{
+    desiredNumberOfVanguards = numberOfVanguards.value;
+}
+
+function UpdateDesiredNumberOfSpecialists(numberOfSpecialists)
+{
+    desiredNumberOfSpecialists = numberOfSpecialists.value;
+}
+
+function UpdateDesiredNumberOfDefenders(numberOfDefenders)
+{
+    desiredNumberOfDefenders = numberOfDefenders.value;
+}
+
+function UpdateDesiredNumberOfGuards(numberOfGuards)
+{
+    desiredNumberOfGuards = numberOfGuards.value;
+}
+
+function UpdateDesiredNumberOfCasters(numberOfCasters)
+{
+    desiredNumberOfCasters = numberOfCasters.value;
+}
+
+function UpdateDesiredTeamSize(teamSize)
+{
+    desiredTeamSize = teamSize;
+}
+
+function ToggleStagePoolFromListOfStages(callerCheckbox)
+{
+    if (!callerCheckbox.checked)
+    {
+        stagePoolsToFilterOut.push(callerCheckbox.value);
+    }
+
+    else
+    {
+        stagePoolsToFilterOut.splice(stagePoolsToFilterOut.indexOf(callerCheckbox.value), 1);
+    }
+
 }

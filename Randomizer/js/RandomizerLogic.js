@@ -128,7 +128,9 @@ for (var i = 0; i < userPoolOfOperators.length; i++)
 
 updateSelectedState();
 
+
 completePoolOfOperators = userPoolOfOperators;
+
 completePoolOfOperatorsDefault = completePoolOfOperators;
 
 
@@ -153,8 +155,6 @@ rollATeamButton.onclick = function()
     RemoveDummyCheckboxValueFromListOfOperators(completePoolOfOperators);
 
     FilterOperatorPoolBasedOnPreferences(listOfThingsToFilterPoolWith);
-
-    console.log(completePoolOfOperators);
 
 
     if (desiredNumberOfMedics != 0)
@@ -268,14 +268,17 @@ function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)
 }
 
 function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst, classPoolToSpliceOperatorFrom)
+{
+    var foundUnits = 0;
+
+    while (foundUnits < desiredUnitAmount)
     {
-        for (var i = 0; i < desiredUnitAmount; i++)
+        for (var i = foundUnits; i < desiredUnitAmount; i++)
         {
             var randomUnit = GetRandomOperatorFromOperatorPool(classPoolToSpliceOperatorFrom);
 
             for (var y = 0; y < poolOfOperatorsToCheckAgainst.length; y++)
             {
-
                 if (poolOfOperatorsToCheckAgainst[y] == randomUnit)
                 {
                     PushOperatorIntoPoolOfRolledOperators(randomUnit);
@@ -285,19 +288,16 @@ function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst,
                     classPoolToSpliceOperatorFrom.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
 
                     poolOfOperatorsToCheckAgainst.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
+                    
+                    foundUnits++;
                 }
             }
         }
-
-        poolOfOperatorsToCheckAgainst = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
-
-        // For lack of a better name, this function draws a random operator from any given class,
-        // checks to see if said operator hasn't been filtered out of the complete pool of operators.
-        // If they haven't been filtered, add said operator to the list of rolled operators,
-        // and remove them from the complete pool + class pool as to not roll them again.
-        // I begrudgingly add this comment because the convenience of having this multi-headed function
-        // exceeds the drawbacks of having to repeat the code instead.
     }
+
+    poolOfOperatorsToCheckAgainst = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators);
+}
+
 
 function SpliceAnEntireClassOutOfOperatorPool(poolToSplice, classToSpliceOut)
     {

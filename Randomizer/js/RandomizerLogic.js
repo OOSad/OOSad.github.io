@@ -51,7 +51,6 @@ var desiredNumberOfGuards = 0;
 var desiredNumberOfCasters = 0;
 
 
-
 var prologueStages = [ "0-1", "0-2", "0-3", "0-4", "0-5", "0-6", "0-7", "0-8", "0-9", "0-10", "0-11" ];
 var chapterOneStages = [ "1-1", "1-2", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-12", "S2-1", "S2-2", "S2-3", "S2-4", "S2-5", "S2-6", "S2-7", "S2-8", "S2-9", "S2-10", "S2-11", "S2-12" ];
 var chapterTwoStages = [ "2-1", "S2-1", "2-2", "S2-2", "S2-3", "S2-4", "2-3", "2-4", "S2-5", "S2-6", "S2-7", "2-5", "2-6", "2-7", "S2-8", "S2-9", "2-8", "2-9", "S2-10", "S2-11", "S2-12", "2-10" ];
@@ -64,16 +63,11 @@ var chapterSevenStages = [ "7-2", "7-3", "7-4", "7-5", "7-6", "7-8", "7-9", "7-1
 var completePoolOfStages = [];
 var completePoolOfStagesDefault = [ "0-1", "0-2", "0-3", "0-4", "0-5", "0-6", "0-7", "0-8", "0-9", "0-10", "0-11", "1-1", "1-2", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-12", "2-1", "S2-1", "2-2", "S2-2", "S2-3", "S2-4", "2-3", "2-4", "S2-5", "S2-6", "S2-7", "2-5", "2-6", "2-7", "S2-8", "S2-9", "2-8", "2-9", "S2-10", "S2-11", "S2-12", "2-10", "3-1", "3-2", "3-3", "3-4", "3-5", "3-6", "3-7", "3-8", "4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", "4-9", "4-10", "5-1", "5-2", "5-3", "5-4", "5-5", "5-6", "5-7", "5-8", "5-9", "5-10", "6-1", "6-2", "6-3", "6-4", "6-5", "6-8", "6-9", "6-10", "6-11", "6-12", "6-14", "6-15", "6-16", "7-2", "7-3", "7-4", "7-5", "7-6", "7-8", "7-9", "7-10", "7-11", "7-12", "7-13", "7-14", "7-15", "7-16", "7-18", "S3-1", "S3-2", "S3-3", "S3-4", "S3-5", "S3-6", "S4-1", "S4-2", "S4-3", "S4-4", "S4-5", "S4-6", "S4-7", "S4-8", "S4-9", "S4-10", "S5-1", "S5-2", "S5-3", "S5-4", "S5-5", "S5-6", "S5-7", "S5-8", "H5-1", "H5-2", "H5-3", "H5-4", "H6-1", "H6-2", "H6-3", "H6-4", "H7-1", "H7-2", "H7-3", "H7-4" ];
 
-var chaptersToFilterOut = [];
+var stagePoolsToFilterOut = [];
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
 var rollAStageButton = document.getElementById("RollAStageButton");
 var sortAlphabeticallyButton = document.getElementById("SortAlphabeticallyButton");
-
-
-
-
-
 
 
 
@@ -97,42 +91,43 @@ updateSelectedState = function()
 
 
 
+
 // Create and initialize things that keep track of operators user has.
 
-for (var i = 0; i < completePoolOfOperatorsDefault.length; i++)
 {
-    CreateDummyCheckbox(completePoolOfOperatorsDefault[i]);
-}
-
-var userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckbox");
-userOperatorCheckboxes[0].setAttribute("onchange", "CheckAllTheUserOperatorCheckboxes(this)");
-
-
-if (JSON.parse(localStorage.getItem("UserOps") == null))
-{
-    localStorage.setItem("UserOps", JSON.stringify(userPoolOfOperators));
-}
-
-userPoolOfOperators = JSON.parse(localStorage.getItem("UserOps"));
-
-for (var i = 0; i < userPoolOfOperators.length; i++)
-{
-    for (var x = 0; x < userOperatorCheckboxes.length; x++)
+    for (var i = 0; i < completePoolOfOperatorsDefault.length; i++)
     {
-        if (userOperatorCheckboxes[x].value == userPoolOfOperators[i])
+        CreateDummyCheckbox(completePoolOfOperatorsDefault[i]);
+    }
+
+    var userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckbox");
+    userOperatorCheckboxes[0].setAttribute("onchange", "CheckAllTheUserOperatorCheckboxes(this)");
+
+    if (JSON.parse(localStorage.getItem("UserOps") == null))
+    {
+        localStorage.setItem("UserOps", JSON.stringify(userPoolOfOperators));
+    }
+
+    userPoolOfOperators = JSON.parse(localStorage.getItem("UserOps"));
+
+    for (var i = 0; i < userPoolOfOperators.length; i++)
+    {
+        for (var x = 0; x < userOperatorCheckboxes.length; x++)
         {
-            userOperatorCheckboxes[x].checked = true;
+            if (userOperatorCheckboxes[x].value == userPoolOfOperators[i])
+            {
+                userOperatorCheckboxes[x].checked = true;
+            }
         }
     }
+
+    updateSelectedState();
+
+    completePoolOfOperators = userPoolOfOperators;
+
+    completePoolOfOperatorsDefault = completePoolOfOperators;
+
 }
-
-updateSelectedState();
-
-
-completePoolOfOperators = userPoolOfOperators;
-
-completePoolOfOperatorsDefault = completePoolOfOperators;
-
 
 
 
@@ -148,7 +143,7 @@ rollATeamButton.onclick = function()
 {
     rolledPoolOfOperators = EmptyList();
 
-    ResetEveryPoolOfOperatorsToDefault();
+    ResetALotOfPoolsToDefaultAtTheSameTime();
 
     desiredTeamSize = document.getElementById("DesiredTeamSizeField").value;
 
@@ -200,7 +195,7 @@ rollATeamButton.onclick = function()
     
     for (var i = 0; i < desiredTeamSize; i++)
     {
-        var selectedOperator = GetRandomOperatorFromOperatorPool(completePoolOfOperators);
+        var selectedOperator = GetRandomItemFromPool(completePoolOfOperators);
         
         completePoolOfOperators.splice(completePoolOfOperators.indexOf(selectedOperator), 1);
 
@@ -230,11 +225,11 @@ sortAlphabeticallyButton.onclick = function()
 
 rollAStageButton.onclick = function()
 {
-    completePoolOfStages = ResetPoolOfOperatorsToDefault(completePoolOfStagesDefault);
+    completePoolOfStages = ResetPoolOfThingsToDefault(completePoolOfStagesDefault);
      
-    FilterMapPoolBasedOnPreferences(chaptersToFilterOut);
+    FilterCompletePoolOfStagesBasedOnFilteringPreferences(stagePoolsToFilterOut);
     
-    var selectedMap = GetRandomOperatorFromOperatorPool(completePoolOfStages);
+    var selectedMap = GetRandomItemFromPool(completePoolOfStages);
 
     document.getElementById("StageLabel").textContent = selectedMap;
 
@@ -256,6 +251,9 @@ rollAStageButton.onclick = function()
 
 // UTILITY FUNCTIONS
 
+
+
+
 function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)
 {
     for (let i = 0; i < listOfOperators.length; i++)
@@ -275,7 +273,7 @@ function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst,
     {
         for (var i = foundUnits; i < desiredUnitAmount; i++)
         {
-            var randomUnit = GetRandomOperatorFromOperatorPool(classPoolToSpliceOperatorFrom);
+            var randomUnit = GetRandomItemFromPool(classPoolToSpliceOperatorFrom);
 
             for (var y = 0; y < poolOfOperatorsToCheckAgainst.length; y++)
             {
@@ -323,7 +321,29 @@ function EmptyList()
 }
 
 
-function ResetPoolOfOperatorsToDefault(poolOfDefaultsGlobal)
+
+
+function ResetALotOfPoolsToDefaultAtTheSameTime()
+{
+    completePoolOfOperators = ResetPoolOfThingsToDefault(completePoolOfOperatorsDefault);
+    medicOperators = ResetPoolOfThingsToDefault(medicOperatorsDefault);
+    supporterOperators = ResetPoolOfThingsToDefault(supporterOperatorsDefault);
+    sniperOperators = ResetPoolOfThingsToDefault(sniperOperatorsDefault);
+    vanguardOperators = ResetPoolOfThingsToDefault(vanguardOperatorsDefault);
+    specialistOperators = ResetPoolOfThingsToDefault(specialistOperatorsDefault);
+    defenderOperators = ResetPoolOfThingsToDefault(defenderOperatorsDefault);
+    guardOperators = ResetPoolOfThingsToDefault(guardOperatorsDefault);
+    casterOperators = ResetPoolOfThingsToDefault(casterOperatorsDefault);
+    oneStarOperators = ResetPoolOfThingsToDefault(oneStarOperatorsDefault);
+    twoStarOperators = ResetPoolOfThingsToDefault(twoStarOperatorsDefault);
+    threeStarOperators = ResetPoolOfThingsToDefault(threeStarOperatorsDefault);
+    fourStarOperators = ResetPoolOfThingsToDefault(fourStarOperatorsDefault);
+    fiveStarOperators = ResetPoolOfThingsToDefault(fiveStarOperatorsDefault);
+    sixStarOperators = ResetPoolOfThingsToDefault(sixStarOperatorsDefault);
+    completePoolOfStages = ResetPoolOfThingsToDefault(completePoolOfStagesDefault);
+}
+
+function ResetPoolOfThingsToDefault(poolOfDefaultsGlobal)
 {
     var poolToReset = [];
 
@@ -335,26 +355,6 @@ function ResetPoolOfOperatorsToDefault(poolOfDefaultsGlobal)
     return poolToReset;
 }
 
-function ResetEveryPoolOfOperatorsToDefault()
-{
-    completePoolOfOperators = ResetPoolOfOperatorsToDefault(completePoolOfOperatorsDefault);
-    medicOperators = ResetPoolOfOperatorsToDefault(medicOperatorsDefault);
-    supporterOperators = ResetPoolOfOperatorsToDefault(supporterOperatorsDefault);
-    sniperOperators = ResetPoolOfOperatorsToDefault(sniperOperatorsDefault);
-    vanguardOperators = ResetPoolOfOperatorsToDefault(vanguardOperatorsDefault);
-    specialistOperators = ResetPoolOfOperatorsToDefault(specialistOperatorsDefault);
-    defenderOperators = ResetPoolOfOperatorsToDefault(defenderOperatorsDefault);
-    guardOperators = ResetPoolOfOperatorsToDefault(guardOperatorsDefault);
-    casterOperators = ResetPoolOfOperatorsToDefault(casterOperatorsDefault);
-    oneStarOperators = ResetPoolOfOperatorsToDefault(oneStarOperatorsDefault);
-    twoStarOperators = ResetPoolOfOperatorsToDefault(twoStarOperatorsDefault);
-    threeStarOperators = ResetPoolOfOperatorsToDefault(threeStarOperatorsDefault);
-    fourStarOperators = ResetPoolOfOperatorsToDefault(fourStarOperatorsDefault);
-    fiveStarOperators = ResetPoolOfOperatorsToDefault(fiveStarOperatorsDefault);
-    sixStarOperators = ResetPoolOfOperatorsToDefault(sixStarOperatorsDefault);
-
-    completePoolOfStages = ResetPoolOfOperatorsToDefault(completePoolOfStagesDefault);
-}
 
 function PushOperatorIntoPoolOfRolledOperators(operator)
 {
@@ -370,11 +370,11 @@ function GetRandomNumber(min, max)
 
 
 
-function GetRandomOperatorFromOperatorPool(operatorPool)
+function GetRandomItemFromPool(poolOfThings)
 {
-    var randomNumber = GetRandomNumber(0, operatorPool.length);
+    var randomNumber = GetRandomNumber(0, poolOfThings.length);
 
-    return operatorPool[randomNumber];
+    return poolOfThings[randomNumber];
 }
 
 
@@ -583,17 +583,17 @@ function ToggleStagePoolFromListOfStages(callerCheckbox)
 {
     if (!callerCheckbox.checked)
     {
-        chaptersToFilterOut.push(callerCheckbox.value);
+        stagePoolsToFilterOut.push(callerCheckbox.value);
     }
 
     else
     {
-        chaptersToFilterOut.splice(chaptersToFilterOut.indexOf(callerCheckbox.value), 1);
+        stagePoolsToFilterOut.splice(stagePoolsToFilterOut.indexOf(callerCheckbox.value), 1);
     }
 
 }
 
-function FilterMapPoolBasedOnPreferences(listOfChapters)
+function FilterCompletePoolOfStagesBasedOnFilteringPreferences(listOfChapters)
 {
     for (var i = 0; i < listOfChapters.length; i++)
     {

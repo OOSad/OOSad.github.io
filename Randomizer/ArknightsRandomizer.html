@@ -47,7 +47,7 @@
 
     <div id="FiltersDiv">
         <div id="IncludedClassesDiv">
-        <label>Classes To Include: </label>
+        <label class="TitleHeader">Classes To Include: </label>
         <div class="IncludedClassCheckbox">
             <input type="checkbox" id="MedicClassCheckbox" value="Medics" checked onchange="ToggleOperatorClassFromListOfClasses(this)">
             <label for="MedicClassCheckbox">Medics</label>
@@ -83,7 +83,7 @@
     </div>
 
     <div id="IncludedRaritiesDiv">
-        <label>Rarities To Include: </label>
+        <label class="TitleHeader">Rarities To Include: </label>
         <div class="IncludedRarityCheckbox">
             <input type="checkbox" id="OneStarCheckbox" value="OneStar" checked onchange="ToggleOperatorClassFromListOfClasses(this)">
             <label for="OneStarCheckbox">*1</label>
@@ -112,7 +112,7 @@
         
     </div>
     <div id="MinimumNumberIncludedDiv">
-        <label>Include At Least: </label>
+        <label class="TitleHeader">Include At Least: </label>
         <div>
             <input type="number" id="IncludeFieldMedics" min="0" max="12" onchange="UpdateDesiredNumberOfMedics(this)"><label for="IncludeFieldMedics"> Medic(s)</label>
         </div>
@@ -140,7 +140,7 @@
     </div>
 
     <div id="IncludedStagesDiv">
-        <label>Stages To Include: </label>
+        <label class="TitleHeader">Stages To Include: </label>
         <div class="IncludedStageCheckbox">
             <input type="checkbox" id="chapterPrologueCheckbox" value="Prologue" checked onchange="ToggleStagePoolFromListOfStages(this)">
             <label for="chapterPrologueCheckbox">Prologue</label>

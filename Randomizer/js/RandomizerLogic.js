@@ -1,52 +1,23 @@
 // PROGRAM VARIABLES
 var operatorData, stageData;
-var completePoolOfOperators = [];
 var completePoolOfOperatorsDefault;
 
 var userPoolOfOperators = [];
 
 var rolledPoolOfOperators = [];
-var rolledPoolOfOperatorsDefault = [];
 var userOperatorCheckboxes = [];
-
-var medicOperators = [];
-var medicOperatorsDefault;
-var supporterOperators = [];
-var supporterOperatorsDefault;
-var sniperOperators = [];
-var sniperOperatorsDefault;
-var vanguardOperators = [];
-var vanguardOperatorsDefault;
-var specialistOperators = [];
-var specialistOperatorsDefault;
-var defenderOperators = [];
-var defenderOperatorsDefault;
-var guardOperators = [];
-var guardOperatorsDefault;
-var casterOperators = [];
-var casterOperatorsDefault;
 
 var listOfThingsToFilterPoolWith = [];
 
-var oneStarOperators = [];
-var twoStarOperators = [];
-var threeStarOperators = [];
-var fourStarOperators = [];
-var fiveStarOperators = [];
-var sixStarOperators = [];
+var charIdMap = {};
 
-var charIdMap;
-
-var prologueStages, chapterOneStages, chapterTwoStages, chapterThreeStages, chapterFourStages, chapterFiveStages, chapterSixStages, chapterSevenStages, chapterEightStages;
-        
-var completePoolOfStages = [];
-var completePoolOfStagesDefault;
 var stagePoolsToFilterOut = [];
 
 var userOperatorCheckboxes;
 
 var classMapping = {"Medics": "MEDIC", "Supporters": "SUPPORT", "Snipers": "SNIPER", "Vanguards": "PIONEER", "Specialists": "SPECIAL", "Defenders": "TANK", "Guards": "WARRIOR", "Casters": "CASTER"};
 var rarityMapping = ["OneStar", "TwoStar", "ThreeStar", "FourStar", "FiveStar", "SixStar"];
+var stageMapping = ["Prologue", "ChapterOne", "ChapterTwo", "ChapterThree", "ChapterFour", "ChapterFive", "ChapterSix", "ChapterSeven", "ChapterEight", "ChapterNine", "ChapterTen"];
 
 fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_US/gamedata/excel/stage_table.json')
 .then(res => res.json())
@@ -62,47 +33,15 @@ fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_U
 		if (!operatorData[key].displayNumber)
 			delete operatorData[key]
 		}
-	completePoolOfOperatorsDefault = Object.values(operatorData).map(x=>x.name);
-
-	medicOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='MEDIC').map(x=>x.name);
-	supporterOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='SUPPORT').map(x=>x.name);
-	sniperOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='SNIPER').map(x=>x.name);
-	vanguardOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='PIONEER').map(x=>x.name);
-	specialistOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='SPECIAL').map(x=>x.name);
-	defenderOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='TANK').map(x=>x.name);
-	guardOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='WARRIOR').map(x=>x.name);
-	casterOperatorsDefault = Object.values(operatorData).filter(x=>x.profession=='CASTER').map(x=>x.name);
-
-	oneStarOperatorsDefault = Object.values(operatorData).filter(x=>x.rarity==0).map(x=>x.name);
-	twoStarOperatorsDefault = Object.values(operatorData).filter(x=>x.rarity==1).map(x=>x.name);
-	threeStarOperatorsDefault = Object.values(operatorData).filter(x=>x.rarity==2).map(x=>x.name);
-	fourStarOperatorsDefault = Object.values(operatorData).filter(x=>x.rarity==3).map(x=>x.name);
-	fiveStarOperatorsDefault = Object.values(operatorData).filter(x=>x.rarity==4).map(x=>x.name);
-	sixStarOperatorsDefault = Object.values(operatorData).filter(x=>x.rarity==5).map(x=>x.name);
-	charIdMap = {};
 	for(var key in operatorData){
 		charIdMap[operatorData[key].name] = key;
 	}
-
-	prologueStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_0' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterOneStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_1' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterTwoStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_2' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterThreeStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_3' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterFourStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_4' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterFiveStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_5' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterSixStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_6' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterSevenStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_7' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	chapterEightStages = Object.values(stageData.stages).filter(x=>x.zoneId=='main_8' && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code)
-	completePoolOfStagesDefault = Object.values(stageData.stages).filter(x=>(x.stageType=='MAIN' || x.stageType=='SUB') && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL').map(x=>x.code);
 
 	(function() {
 		// Create and initialize things that keep track of operators user has.
 		// Anything that is not declaring a function MUST be done within this function to ensure operator list had been loaded first.
 		// Be sure not to declare variables you will need elsewhere within this function.
-		for (var i = 0; i < completePoolOfOperatorsDefault.length; i++)
-		{
-			CreateDummyCheckbox(completePoolOfOperatorsDefault[i]);
-		}
+		Object.values(operatorData).forEach(x=>CreateDummyCheckbox(x.name));
 
 		userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckbox");
 		userOperatorCheckboxes[0].setAttribute("onchange", "CheckAllTheUserOperatorCheckboxes(this)");
@@ -126,8 +65,6 @@ fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_U
 		}
 
 		updateSelectedState();
-
-		completePoolOfOperators = userPoolOfOperators;
 })()})
 
 
@@ -182,8 +119,6 @@ function shuffle(array) {
 
 
 // Rolling Operators
-// If the user hits the roll a team button, reset the involved lists, select random operators and update the labels on the page.
-// If the user wants a specific number of operators from a certain class, then add those to the list of rolled operators first.
 
 rollATeamButton.onclick = function()
 {
@@ -238,10 +173,15 @@ sortAlphabeticallyButton.onclick = function()
 
 rollAStageButton.onclick = function()
 {
-    completePoolOfStages = ResetPoolOfThingsToDefault(completePoolOfStagesDefault);
-    FilterCompletePoolOfStagesBasedOnFilteringPreferences(stagePoolsToFilterOut);
-    
-    var selectedStage = GetRandomItemFromPool(completePoolOfStages);
+	// Filter stage data to only include main story stages
+	let availableStages = Object.values(stageData.stages).filter(x=>(x.stageType=='MAIN' || x.stageType=='SUB') && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL');
+	
+	// Filter out excluded acts
+	let filters = stagePoolsToFilterOut.map(x => 'main_'+stageMapping.indexOf(x))
+	availableStages = availableStages.filter(x=>!filters.includes(x.zoneId))
+	
+	selectedStage = availableStages[Math.floor(Math.random() * availableStages.length)].code;
+	
     stageLabel.textContent = selectedStage;
 
     var localPathToStagePicture = 'StageIcons/' + selectedStage + '_map.png';
@@ -301,13 +241,6 @@ function FetchDesiredTeamSize()
     return parseInt(document.getElementById("DesiredTeamSizeField").value);
 }
 
-function GetRandomItemFromPool(poolOfThings)
-{
-    var randomNumber = GetRandomNumber(0, poolOfThings.length);
-
-    return poolOfThings[randomNumber];
-}
-
 function UpdateOperatorLabelsOnPage()
 {
     var operatorLabels = FetchAllOperatorLabelsOnPage()
@@ -332,66 +265,6 @@ function FetchAllOperatorLabelsOnPage()
 {
     var operatorLabels = document.getElementsByClassName("OpRollingAreaColumn");
     return operatorLabels;
-}
-
-function FilterCompletePoolOfStagesBasedOnFilteringPreferences(listOfChapters)
-{
-    for (var i = 0; i < listOfChapters.length; i++)
-    {
-        switch (listOfChapters[i])
-        {
-            case "Prologue":
-                FilterOutIndividualPoolOfMaps(prologueStages);
-            break;
-
-            case "ChapterOne":
-                FilterOutIndividualPoolOfMaps(chapterOneStages);
-            break;
-            
-            case "ChapterTwo":
-                FilterOutIndividualPoolOfMaps(chapterTwoStages);
-            break;
-
-            case "ChapterThree":
-                FilterOutIndividualPoolOfMaps(chapterThreeStages);
-            break;
-
-            case "ChapterFour":
-                FilterOutIndividualPoolOfMaps(chapterFourStages);
-            break;
-
-            case "ChapterFive":
-                FilterOutIndividualPoolOfMaps(chapterFiveStages);
-            break;
-
-            case "ChapterSix":
-                FilterOutIndividualPoolOfMaps(chapterSixStages);
-            break;
-
-            case "ChapterSeven":
-                FilterOutIndividualPoolOfMaps(chapterSevenStages);
-            break;
-
-            default:
-            break;
-        }
-    }
-}
-
-function FilterOutIndividualPoolOfMaps(stagesToFilter)
-{
-    for (var i = 0; i < stagesToFilter.length; i++)
-    {
-        for (var x = 0; x < completePoolOfStages.length; x++)
-        {
-            if (stagesToFilter[i] == completePoolOfStages[x])
-            {
-                completePoolOfStages.splice(completePoolOfStages.indexOf(stagesToFilter[i]), 1);
-            }
-
-            else {}
-        }
-    }
 }
 
 function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
@@ -475,7 +348,7 @@ function UpdateDesiredClassAmount(inputElement)
 }
 function UpdateDesiredTeamSize(teamSize)
 {
-    desiredTeamSize = teamSize;
+    desiredTeamSize = parseInt(teamSize);
 }
 
 function ToggleStagePoolFromListOfStages(callerCheckbox)

@@ -78,13 +78,13 @@
 	outline: 2px inset transparent;
 	width: calc(100% - var(--operator-image-size));
 	margin: auto;
+	padding: 4px;
   }
   #checkboxesDiv.filtered
   {
 	outline-color: white;
   }
-  .operatorCheckbox:not(:first-child) .UserOperatorLabel, 
-  .operatorCheckbox:not(:first-child) .UserOperatorCheckbox
+  .UserOperatorCheckbox
   {
     display: none;
   }
@@ -98,9 +98,6 @@
     width: 100%;
 	height: calc(100% - var(--nameplate-height));
 	opacity: 0.65;
-  }
-  .operatorCheckbox:hover img {
-	opacity: 0.8;
   }
   .operatorCheckbox._selected img {
 	opacity: 1;
@@ -119,8 +116,6 @@
 	font-size: calc(0.6 * var(--nameplate-height));
 	cursor: pointer;
   }
-
-
   
   /*Rolled Squad Area*/
   #OpRollingAreaDiv
@@ -154,8 +149,6 @@
   {
     width: 100%;
   }
-
-
 
 
 

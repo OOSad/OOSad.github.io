@@ -13,7 +13,7 @@ var charIdMap = {};
 
 var stagePoolsToFilterOut = [];
 
-var userOperatorCheckboxes;
+var userOperatorCheckboxes, checkAllButton;
 
 var classMapping = {"Medics": "MEDIC", "Supporters": "SUPPORT", "Snipers": "SNIPER", "Vanguards": "PIONEER", "Specialists": "SPECIAL", "Defenders": "TANK", "Guards": "WARRIOR", "Casters": "CASTER"};
 var rarityMapping = ["OneStar", "TwoStar", "ThreeStar", "FourStar", "FiveStar", "SixStar"];
@@ -40,15 +40,19 @@ fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_U
 	(function() {
 		// Create and initialize things that keep track of operators user has.
 		// Anything that is not declaring a function MUST be done within this function to ensure operator list had been loaded first.
-		// Be sure not to declare variables you will need elsewhere within this function.
+		// Be sure not to declare any variables you will need elsewhere within this function (as it is not in the global scope).
+		
+		// create the check all box
+		CreateDummyCheckbox({name: 'Check All', profession: 'ALL'})
+		checkAllButton = document.getElementsByClassName("UserOperatorCheckbox")[0];
 		Object.values(operatorData).sort((a,b)=>{
 			if(a.name < b.name) { return -1; }
 			if(a.name > b.name) { return 1; }
 			return 0;})
 			.forEach(x=>CreateDummyCheckbox(x));
 
-		userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckbox");
-		userOperatorCheckboxes[0].setAttribute("onchange", "CheckAllTheUserOperatorCheckboxes(this)");
+		// slice off the "check all" box
+		userOperatorCheckboxes = Array.from(document.getElementsByClassName("UserOperatorCheckbox")).slice(1);
 
 		if (JSON.parse(localStorage.getItem("UserOps") == null))
 		{
@@ -240,7 +244,7 @@ function filterOperatorListByClass(className, doFilter)
 	{
 		document.getElementById("checkboxesDiv").classList.add('filtered')
 		Array.from(document.getElementsByClassName('operatorCheckbox')).forEach(e =>{
-			if (e.getAttribute('data-class') == className)
+			if (e.getAttribute('data-class') == className || e.getAttribute('data-class') == 'ALL')
 				e.classList.add('show')
 			else
 				e.classList.remove('show')
@@ -254,34 +258,39 @@ function filterOperatorListByClass(className, doFilter)
 			e.classList.add('show')
 		});
 	}
+	UpdateCheckAllButton();
 }
 
 function CreateDummyCheckbox(operator)
 {
-    var dummyCheckboxClone = document.getElementById("dummyCheckbox").cloneNode(true);
 	let operatorName = operator.name;
 	
-	dummyCheckboxClone.removeAttribute('id');
-	dummyCheckboxClone.setAttribute('data-class', operator.profession);
-	dummyCheckboxClone.classList.add('show');
-    dummyCheckboxClone.childNodes[0].textContent = operatorName;
-    dummyCheckboxClone.childNodes[0].onclick = null;
-    dummyCheckboxClone.childNodes[1].value = operatorName;
+    var checkboxDiv = document.createElement("div");
+	checkboxDiv.classList.add('operatorCheckbox');
+	checkboxDiv.setAttribute('data-class', operator.profession);
+	checkboxDiv.classList.add('show');
 
-    dummyCheckboxClone.childNodes[1].addEventListener("change", () => dummyCheckboxClone.classList.toggle('_selected'));
-    dummyCheckboxClone.onclick = () => dummyCheckboxClone.childNodes[1].click();
-    let im = document.createElement('img');
-    im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[operatorName] + '.png';
-    if (charIdMap[operatorName])
-    {
-        dummyCheckboxClone.appendChild(im);
+	let checkbox = document.createElement('input');
+	checkbox.setAttribute('type', 'checkbox');
+	checkbox.classList.add('UserOperatorCheckbox');
+	checkbox.setAttribute('onchange', 'AddCheckedOperatorsToArray(this)');
+    checkbox.value = operatorName;
+	checkbox.addEventListener("change", () => checkboxDiv.classList.toggle('_selected'));
+	
+	checkboxDiv.appendChild(checkbox);
+    checkboxDiv.onclick = () => checkbox.click();
+    
+	if (charIdMap[operatorName])
+	{
+		let im = document.createElement('img');
+		im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[operatorName] + '.png';
+		checkboxDiv.appendChild(im);
     }
     let name = document.createElement('div');
 	name.classList.add('name');
 	name.innerHTML = operatorName;
-	dummyCheckboxClone.appendChild(name);
-    document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
-
+	checkboxDiv.appendChild(name);
+    document.getElementById("checkboxesDiv").appendChild(checkboxDiv);
 }
 
 function FetchDesiredTeamSize()
@@ -315,45 +324,52 @@ function FetchAllOperatorLabelsOnPage()
     return operatorLabels;
 }
 
-function CheckAllTheUserOperatorCheckboxes(callerCheckbox)
-{
-    userPoolOfOperators = EmptyList();
-
-    if (callerCheckbox.checked)
-    {
-        for (var i = 0; i < userOperatorCheckboxes.length; i++)
-        {
-            userOperatorCheckboxes[i].checked = true;
-            AddCheckedOperatorsToArray(userOperatorCheckboxes[i]);
-        }
-    }
-
-    else if (!callerCheckbox.checked)
-    {
-        for (var i = 0; i < userOperatorCheckboxes.length; i++)
-        {
-            userOperatorCheckboxes[i].checked = false;
-            AddCheckedOperatorsToArray(userOperatorCheckboxes[i]);
-
-        }
-    }
-    
-    updateSelectedState();
-}
-
 function AddCheckedOperatorsToArray(callerCheckbox)
 {
-    if (callerCheckbox.checked)
+	// First handle the "check all" box
+	if (callerCheckbox == checkAllButton)
+	{
+		Array.from(document.getElementsByClassName('operatorCheckbox')).forEach(e => {
+			if (e.parentElement.getAttribute('data-class') != 'ALL' && e.classList.contains('show') && (e.classList.contains('_selected') ^ callerCheckbox.checked)) {
+				e.click();
+			}
+		});
+	}
+    else if (callerCheckbox.checked)
     {
         userPoolOfOperators.push(callerCheckbox.value);
     }
 
-    if (!callerCheckbox.checked)
+    else if (!callerCheckbox.checked)
     {
         userPoolOfOperators.splice(userPoolOfOperators.indexOf(callerCheckbox.value), 1);
     }
 
     WriteUserOperatorsArrayToFile(userPoolOfOperators);
+}
+
+function AllVisibleAreChecked()
+{
+	for (e of Array.from(document.getElementsByClassName('operatorCheckbox')))
+	{
+		if (e.classList.contains('show') && !e.classList.contains('_selected') && e != checkAllButton.parentElement)
+			return false;
+	}
+	return true;
+}
+
+function UpdateCheckAllButton()
+{
+	if (AllVisibleAreChecked())
+	{
+		checkAllButton.parentElement.classList.add('_selected')
+		checkAllButton.checked = true;
+	}
+	else
+	{
+		checkAllButton.parentElement.classList.remove('_selected')
+		checkAllButton.checked = false;
+	}
 }
 
 function WriteUserOperatorsArrayToFile(userOperators)

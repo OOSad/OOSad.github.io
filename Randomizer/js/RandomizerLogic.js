@@ -125,7 +125,6 @@ fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_U
 		updateSelectedState();
 
 		completePoolOfOperators = userPoolOfOperators;
-		completePoolOfOperatorsDefault = completePoolOfOperators;
 })()})
 
 
@@ -338,7 +337,7 @@ function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)
 
 function ResetALotOfPoolsToDefaultAtTheSameTime()
 {
-    completePoolOfOperators = ResetPoolOfThingsToDefault(completePoolOfOperatorsDefault);
+    completePoolOfOperators = ResetPoolOfThingsToDefault(userPoolOfOperators);
     medicOperators = ResetPoolOfThingsToDefault(medicOperatorsDefault);
     supporterOperators = ResetPoolOfThingsToDefault(supporterOperatorsDefault);
     sniperOperators = ResetPoolOfThingsToDefault(sniperOperatorsDefault);

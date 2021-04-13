@@ -305,7 +305,10 @@ function CreateDummyCheckbox(operatorName)
     {
         dummyCheckboxClone.appendChild(im);
     }
-    
+    let name = document.createElement('div');
+	name.classList.add('name');
+	name.innerHTML = operatorName;
+	dummyCheckboxClone.appendChild(name);
     document.getElementById("checkboxesDiv").appendChild(dummyCheckboxClone);
 
 }

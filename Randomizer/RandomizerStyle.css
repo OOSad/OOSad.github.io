@@ -1,4 +1,7 @@
-
+  :root
+  {
+    --nameplate-height: 20px;
+  }
 /*Top Navigation Bar*/
  .topnav 
   {
@@ -30,15 +33,15 @@
   #dummyCheckbox
   {
     display: flex;
+	flex-direction: column;
     width: 75px;
-    height: 75px;
+    height: calc(75px + var(--nameplate-height));
     padding-bottom: 0px;
     margin: 5px;
-    justify-content: center;
-    align-items: flex-end;
-    background-color: whitesmoke;
+    background-color: rgb(85, 85, 85);
     color:black;
-    
+    transition: all .2s ease-in-out;
+    cursor: pointer;
   }
 
   #checkboxesDiv
@@ -54,15 +57,35 @@
   }
 
   #dummyCheckbox._selected {
-    box-shadow: 0 0 3pt 2pt  #0098dc;
+    box-shadow: 0 0 2pt 1pt  #ffa500;
+	background-color: rgb(35, 35, 35);
   }
 
   #dummyCheckbox img {
     width: 100%;
+	height: calc(100% - var(--nameplate-height));
+	opacity: 0.65;
   }
-
-
-
+  #dummyCheckbox:hover img {
+	opacity: 0.8;
+  }
+  #dummyCheckbox._selected img {
+	opacity: 1;
+  }
+  #dummyCheckbox:hover {
+	transform: scale(1.1);
+	background-color: rgb(25,25,25);
+  }
+  #dummyCheckbox .name {
+	height: var(--nameplate-height);
+	line-height: var(--nameplate-height);
+	text-align: center;
+	color: white;
+    font-family: 'Novecentosanswide Normal', Arial, sans-serif;
+	background-color: rgba(255,255,255,.15);
+	font-size: calc(0.6 * var(--nameplate-height));
+	cursor: pointer;
+  }
 
 
   

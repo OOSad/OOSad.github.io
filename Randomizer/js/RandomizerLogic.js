@@ -41,7 +41,11 @@ fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_U
 		// Create and initialize things that keep track of operators user has.
 		// Anything that is not declaring a function MUST be done within this function to ensure operator list had been loaded first.
 		// Be sure not to declare variables you will need elsewhere within this function.
-		Object.values(operatorData).forEach(x=>CreateDummyCheckbox(x.name));
+		Object.values(operatorData).sort((a,b)=>{
+			if(a.name < b.name) { return -1; }
+			if(a.name > b.name) { return 1; }
+			return 0;})
+			.forEach(x=>CreateDummyCheckbox(x));
 
 		userOperatorCheckboxes = document.getElementsByClassName("UserOperatorCheckbox");
 		userOperatorCheckboxes[0].setAttribute("onchange", "CheckAllTheUserOperatorCheckboxes(this)");
@@ -65,6 +69,7 @@ fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_U
 		}
 
 		updateSelectedState();
+		populateSorterDiv();
 })()})
 
 
@@ -94,27 +99,6 @@ updateSelectedState = function()
             userOperatorCheckboxes[i].parentElement.classList.remove('_selected');
         }
     }
-}
-
-
-function shuffle(array) {
-	// see: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
 }
 
 
@@ -209,13 +193,77 @@ rollAStageButton.onclick = function()
 
 // Functions, used throughout the program.
 
-function CreateDummyCheckbox(operatorName)
-{
-    var dummyCheckbox = document.getElementById("dummyCheckbox");
+function shuffle(array) {
+	// see: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
-    var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+function populateSorterDiv()
+{
+	let mainDiv = document.getElementById('operatorSorter');
+	Object.entries(classMapping).forEach(pair => {
+		let [displayName, realName] = pair;
+		let div = document.createElement('div');
+		div.classList.add('class-selector');
+		div.setAttribute('data-class', realName);
+		let im = document.createElement('img');
+		im.src = 'https://aceship.github.io/AN-EN-Tags/img/classes/class_' + displayName.replace(/s$/g, '').toLowerCase() + '.png';
+		div.appendChild(im);
+		mainDiv.appendChild(div);
+		div.addEventListener('click', function(e) {
+			e.preventDefault();
+			div.classList.toggle('_selected');
+			Array.from(document.getElementsByClassName('class-selector')).forEach(e=> {if (e!=div) e.classList.remove('_selected')});
+			filterOperatorListByClass(div.getAttribute('data-class'),div.classList.contains('_selected'));
+		});
+	});
+}
+
+function filterOperatorListByClass(className, doFilter)
+{
+	if (doFilter)
+	{
+		document.getElementById("checkboxesDiv").classList.add('filtered')
+		Array.from(document.getElementsByClassName('operatorCheckbox')).forEach(e =>{
+			if (e.getAttribute('data-class') == className)
+				e.classList.add('show')
+			else
+				e.classList.remove('show')
+			
+		});
+	}
+	else
+	{
+		document.getElementById("checkboxesDiv").classList.remove('filtered')
+		Array.from(document.getElementsByClassName('operatorCheckbox')).forEach(e =>{
+			e.classList.add('show')
+		});
+	}
+}
+
+function CreateDummyCheckbox(operator)
+{
+    var dummyCheckboxClone = document.getElementById("dummyCheckbox").cloneNode(true);
+	let operatorName = operator.name;
 	
 	dummyCheckboxClone.removeAttribute('id');
+	dummyCheckboxClone.setAttribute('data-class', operator.profession);
+	dummyCheckboxClone.classList.add('show');
     dummyCheckboxClone.childNodes[0].textContent = operatorName;
     dummyCheckboxClone.childNodes[0].onclick = null;
     dummyCheckboxClone.childNodes[1].value = operatorName;

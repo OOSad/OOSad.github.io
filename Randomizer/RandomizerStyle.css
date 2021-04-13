@@ -1,6 +1,8 @@
   :root
   {
     --nameplate-height: 20px;
+	--main-background-color: #333333;
+	--operator-image-size: 60px;
   }
 /*Top Navigation Bar*/
  .topnav 
@@ -26,13 +28,32 @@
   }
 
 
-
-
-
   /*Operator Roster Area*/
+  #operatorSorter
+  {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+  }
+  #operatorSorter div
+  {
+	border: 2px inset transparent;
+	border-bottom: none;
+	background: var(--main-background-color);
+  }
+  #operatorSorter div._selected
+  {
+	z-index: 1;
+	border-color: white;
+  }
+  #operatorSorter img
+  {
+	width: var(--operator-image-size);
+	height: var(--operator-image-size);
+  }
   .operatorCheckbox
   {
-    display: flex;
+    display: none;
 	flex-direction: column;
     width: 75px;
     height: calc(75px + var(--nameplate-height));
@@ -43,13 +64,25 @@
     transition: all .15s ease-in-out;
     cursor: pointer;
   }
-
+  
+  .operatorCheckbox.show
+  {
+	display: flex;
+  }
+  
   #checkboxesDiv
   {
     display: flex;
-    flex-wrap: wrap;      
+    flex-wrap: wrap;
+	justify-content: center;
+	outline: 2px inset transparent;
+	width: calc(100% - var(--operator-image-size));
+	margin: auto;
   }
-
+  #checkboxesDiv.filtered
+  {
+	outline-color: white;
+  }
   .operatorCheckbox:not(:first-child) .UserOperatorLabel, 
   .operatorCheckbox:not(:first-child) .UserOperatorCheckbox
   {
@@ -154,7 +187,7 @@
   /*Miscellaneous Stuff*/
   body
   {
-    background-color:#333333;
+    background-color: var(--main-background-color);
     color: #c8c8c8;
   }
 
@@ -162,4 +195,5 @@
   {
     background-color: black;
     margin-right: 10px;
+	margin-bottom: 5px;
   }

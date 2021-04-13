@@ -45,6 +45,9 @@ var stagePoolsToFilterOut = [];
 
 var userOperatorCheckboxes;
 
+var classMapping = {"Medics": "MEDIC", "Supporters": "SUPPORT", "Snipers": "SNIPER", "Vanguards": "PIONEER", "Specialists": "SPECIAL", "Defenders": "TANK", "Guards": "WARRIOR", "Casters": "CASTER"};
+var rarityMapping = ["OneStar", "TwoStar", "ThreeStar", "FourStar", "FiveStar", "SixStar"];
+
 fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_US/gamedata/excel/stage_table.json')
 .then(res => res.json())
 .then(js => {
@@ -130,14 +133,7 @@ fetch('https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_U
 
 var desiredTeamSize = 12;
 
-var desiredNumberOfMedics = 0;
-var desiredNumberOfSupporters = 0;
-var desiredNumberOfSnipers = 0;
-var desiredNumberOfVanguards = 0;
-var desiredNumberOfSpecialists = 0;
-var desiredNumberOfDefenders = 0;
-var desiredNumberOfGuards = 0;
-var desiredNumberOfCasters = 0;
+var desiredClassAmounts = {"MEDIC":0, "SUPPORT":0, "SNIPER":0, "PIONEER":0, "SPECIAL":0, "TANK":0, "WARRIOR":0, "CASTER":0}
 
 var rollATeamButton = document.getElementById("RollATeamButton"); 
 var rollAStageButton = document.getElementById("RollAStageButton");
@@ -164,7 +160,25 @@ updateSelectedState = function()
 }
 
 
+function shuffle(array) {
+	// see: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
 
 
 // Rolling Operators
@@ -173,64 +187,28 @@ updateSelectedState = function()
 
 rollATeamButton.onclick = function()
 {
-    ResetALotOfPoolsToDefaultAtTheSameTime();
-
-    RemoveDummyCheckboxValueFromListOfOperators(completePoolOfOperators);
-
-    FilterCompletePoolOfOperatorsBasedOnFilteringPreferences(listOfThingsToFilterPoolWith);
-
-    desiredTeamSize = FetchDesiredTeamSize();
-
-    if (desiredNumberOfMedics != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfMedics, completePoolOfOperators, medicOperators);
-    }
-
-    if (desiredNumberOfSupporters != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfSupporters, completePoolOfOperators, supporterOperators);
-    }
-
-    if (desiredNumberOfSnipers != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfSnipers, completePoolOfOperators, sniperOperators);
-    }
-
-    if (desiredNumberOfVanguards != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfVanguards, completePoolOfOperators, vanguardOperators);
-    }
-
-    if (desiredNumberOfSpecialists != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfSpecialists, completePoolOfOperators, specialistOperators);
-    }
-
-    if (desiredNumberOfDefenders != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfDefenders, completePoolOfOperators, defenderOperators);
-    }
-
-    if (desiredNumberOfGuards != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfGuards, completePoolOfOperators, guardOperators);
-    }
-
-    if (desiredNumberOfCasters != 0)
-    {
-        CheckAndAddRandomUnit(desiredNumberOfCasters, completePoolOfOperators, casterOperators);
-    }
-    
-
-    for (var i = 0; i < desiredTeamSize; i++)
-    {
-        var selectedOperator = GetRandomItemFromPool(completePoolOfOperators);
-        
-        completePoolOfOperators.splice(completePoolOfOperators.indexOf(selectedOperator), 1);
-
-        PushOperatorIntoPoolOfRolledOperators(selectedOperator);
-    }
-
+    // Get list of operators from JSON
+	let availableOperators = Object.values(operatorData).filter(x=>userPoolOfOperators.includes(x.name))
+	
+	// Filter list using selected rarities/classes
+	let filters = listOfThingsToFilterPoolWith.map(x => classMapping[x] ? classMapping[x] : rarityMapping.indexOf(x))
+	availableOperators = availableOperators.filter(x=>!(filters.includes(x.rarity) || filters.includes(x.profession)))
+	
+	rolledPoolOfOperators = [];
+	desiredTeamSize = FetchDesiredTeamSize();
+	
+	// Add required number of each class to pool
+	Object.entries(desiredClassAmounts).forEach(pair => {
+		let [className, amountNeeded] = pair;
+		rolledPoolOfOperators = rolledPoolOfOperators.concat(shuffle(availableOperators.filter(x=>x.profession==className)).slice(0,amountNeeded))
+	});
+	
+	// Add filler operators to meet the required team size
+	rolledPoolOfOperators = rolledPoolOfOperators.concat(shuffle(availableOperators.filter(x=>!rolledPoolOfOperators.includes(x))).slice(0,(desiredTeamSize - rolledPoolOfOperators.length)))
+	
+	// Truncate the pool if too large
+	rolledPoolOfOperators = shuffle(rolledPoolOfOperators).slice(0,desiredTeamSize);
+	rolledPoolOfOperators = rolledPoolOfOperators.map(x=>x.name);
 
     UpdateOperatorLabelsOnPage();
 }
@@ -241,10 +219,6 @@ sortAlphabeticallyButton.onclick = function()
     rolledPoolOfOperators.sort();
     UpdateOperatorLabelsOnPage();
 }
-
-
-
-
 
 
 
@@ -321,171 +295,9 @@ function CreateDummyCheckbox(operatorName)
 
 }
 
-function RemoveDummyCheckboxValueFromListOfOperators(listOfOperators)  
-{
-    for (let i = 0; i < listOfOperators.length; i++)
-    {
-        if (listOfOperators[i] == "on")
-        {
-            listOfOperators.splice(listOfOperators.indexOf("on"), 1);
-        }
-    }
-
-    //This function removes the default value of a checkbox (on) from an array.
-    //We don't want this default "on" value to exist in any lists of operators.
-}
-
-function ResetALotOfPoolsToDefaultAtTheSameTime()
-{
-    completePoolOfOperators = ResetPoolOfThingsToDefault(userPoolOfOperators);
-    medicOperators = ResetPoolOfThingsToDefault(medicOperatorsDefault);
-    supporterOperators = ResetPoolOfThingsToDefault(supporterOperatorsDefault);
-    sniperOperators = ResetPoolOfThingsToDefault(sniperOperatorsDefault);
-    vanguardOperators = ResetPoolOfThingsToDefault(vanguardOperatorsDefault);
-    specialistOperators = ResetPoolOfThingsToDefault(specialistOperatorsDefault);
-    defenderOperators = ResetPoolOfThingsToDefault(defenderOperatorsDefault);
-    guardOperators = ResetPoolOfThingsToDefault(guardOperatorsDefault);
-    casterOperators = ResetPoolOfThingsToDefault(casterOperatorsDefault);
-    oneStarOperators = ResetPoolOfThingsToDefault(oneStarOperatorsDefault);
-    twoStarOperators = ResetPoolOfThingsToDefault(twoStarOperatorsDefault);
-    threeStarOperators = ResetPoolOfThingsToDefault(threeStarOperatorsDefault);
-    fourStarOperators = ResetPoolOfThingsToDefault(fourStarOperatorsDefault);
-    fiveStarOperators = ResetPoolOfThingsToDefault(fiveStarOperatorsDefault);
-    sixStarOperators = ResetPoolOfThingsToDefault(sixStarOperatorsDefault);
-    rolledPoolOfOperators = ResetPoolOfThingsToDefault(rolledPoolOfOperatorsDefault);
-    completePoolOfStages = ResetPoolOfThingsToDefault(completePoolOfStagesDefault);
-}
-
-function ResetPoolOfThingsToDefault(poolOfDefaultsGlobal)
-{
-    var poolToReset = [];
-
-    for (var i = 0; i < poolOfDefaultsGlobal.length; i++)
-    {
-        poolToReset.push(poolOfDefaultsGlobal[i]);
-    }
-
-    return poolToReset;
-}
-
-function FilterCompletePoolOfOperatorsBasedOnFilteringPreferences(listOfClasses)
-{
-    for (var i = 0; i < listOfClasses.length; i++)
-    {
-        switch (listOfClasses[i])
-        {
-            case "Medics":
-            FilterOutIndividualClass(medicOperators);
-            break;
-
-            case "Supporters":
-            FilterOutIndividualClass(supporterOperators);
-            break;
-            
-            case "Snipers":
-            FilterOutIndividualClass(sniperOperators);
-            break;
-
-            case "Vanguards":
-            FilterOutIndividualClass(vanguardOperators);
-            break;
-
-            case "Specialists":
-            FilterOutIndividualClass(specialistOperators);
-            break;
-
-            case "Defenders":
-            FilterOutIndividualClass(defenderOperators);
-            break;
-
-            case "Guards":
-            FilterOutIndividualClass(guardOperators);
-            break;
-
-            case "Casters":
-            FilterOutIndividualClass(casterOperators);
-            break;
-
-            case "OneStar":
-            FilterOutIndividualClass(oneStarOperators);
-            break;
-
-            case "TwoStar":
-            FilterOutIndividualClass(twoStarOperators);
-            break;
-
-            case "ThreeStar":
-            FilterOutIndividualClass(threeStarOperators);
-            break;
-
-            case "FourStar":
-            FilterOutIndividualClass(fourStarOperators);
-            break;
-
-            case "FiveStar":
-            FilterOutIndividualClass(fiveStarOperators);
-            break;
-
-            case "SixStar":
-            FilterOutIndividualClass(sixStarOperators);
-            break;
-
-            default:
-            break;
-        }
-    }
-}
-
-function FilterOutIndividualClass(operatorsToFilter)
-{
-    for (var i = 0; i < operatorsToFilter.length; i++)
-    {
-        for (var x = 0; x < completePoolOfOperators.length; x++)
-        {
-            if (operatorsToFilter[i] == completePoolOfOperators[x])
-            {
-                completePoolOfOperators.splice(completePoolOfOperators.indexOf(operatorsToFilter[i]), 1);
-            }
-
-            else {}
-        }
-    }
-}
-
 function FetchDesiredTeamSize()
 {
-    return document.getElementById("DesiredTeamSizeField").value;
-}
-
-function CheckAndAddRandomUnit(desiredUnitAmount, poolOfOperatorsToCheckAgainst, classPoolToSpliceOperatorFrom)
-{
-    var foundUnits = 0;
-
-    while (foundUnits < desiredUnitAmount)
-    {
-        for (var i = foundUnits; i < desiredUnitAmount; i++)
-        {
-            var randomUnit = GetRandomItemFromPool(classPoolToSpliceOperatorFrom);
-
-            for (var y = 0; y < poolOfOperatorsToCheckAgainst.length; y++)
-            {
-                if (poolOfOperatorsToCheckAgainst[y] == randomUnit)
-                {
-                    PushOperatorIntoPoolOfRolledOperators(randomUnit);
-
-                    desiredTeamSize--;
-
-                    classPoolToSpliceOperatorFrom.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
-
-                    poolOfOperatorsToCheckAgainst.splice(poolOfOperatorsToCheckAgainst.indexOf(randomUnit), 1);
-                    
-                    foundUnits++;
-                }
-            }
-        }
-    }
-
-    poolOfOperatorsToCheckAgainst = SpliceAnEntireClassOutOfOperatorPool(completePoolOfOperators, medicOperators); //This isn't working properly for some reason.
+    return parseInt(document.getElementById("DesiredTeamSizeField").value);
 }
 
 function GetRandomItemFromPool(poolOfThings)
@@ -493,28 +305,6 @@ function GetRandomItemFromPool(poolOfThings)
     var randomNumber = GetRandomNumber(0, poolOfThings.length);
 
     return poolOfThings[randomNumber];
-}
-
-function PushOperatorIntoPoolOfRolledOperators(operator)
-{
-    rolledPoolOfOperators.push(operator);
-}
-
-
-function SpliceAnEntireClassOutOfOperatorPool(poolToSplice, classToSpliceOut)
-{
-    for (var i = 0; i < poolToSplice.length; i++)
-    {
-        for (var x = 0; x < classToSpliceOut.length; x++)
-        {
-            if (poolToSplice[i] == classToSpliceOut[x])
-            {
-                poolToSplice.splice(poolToSplice.indexOf(classToSpliceOut[x]), 1);
-            }
-        }
-    }
-
-    return poolToSplice;
 }
 
 function UpdateOperatorLabelsOnPage()
@@ -525,12 +315,15 @@ function UpdateOperatorLabelsOnPage()
     for (var i = 0; i < operatorLabels.length; i++)
     {
         operatorLabels[i].textContent = rolledPoolOfOperators[i];
-        let im = document.createElement('img');
-        im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[rolledPoolOfOperators[i]] + '.png';
-        if (charIdMap[rolledPoolOfOperators[i]])
-        {
-            operatorLabels[i].appendChild(im);
-        }
+		if (i < rolledPoolOfOperators.length)
+		{
+			let im = document.createElement('img');
+			im.src = 'https://aceship.github.io/AN-EN-Tags/img/avatars/' + charIdMap[rolledPoolOfOperators[i]] + '.png';
+			if (charIdMap[rolledPoolOfOperators[i]])
+			{
+				operatorLabels[i].appendChild(im);
+			}
+		}
     }
 }
 
@@ -675,47 +468,10 @@ function ToggleOperatorClassFromListOfClasses(callerCheckbox)
     }
     
 }
-
-function UpdateDesiredNumberOfMedics(numberOfMedics)
+function UpdateDesiredClassAmount(inputElement)
 {
-    desiredNumberOfMedics = numberOfMedics.value;
+	desiredClassAmounts[inputElement.getAttribute('data-class')] = parseInt(inputElement.value);
 }
-
-function UpdateDesiredNumberOfSupporters(numberOfSupporters)
-{
-    desiredNumberOfSupporters = numberOfSupporters.value;
-}
-
-function UpdateDesiredNumberOfSnipers(numberOfSnipers)
-{
-    desiredNumberOfSnipers = numberOfSnipers.value;
-}
-
-function UpdateDesiredNumberOfVanguards(numberOfVanguards)
-{
-    desiredNumberOfVanguards = numberOfVanguards.value;
-}
-
-function UpdateDesiredNumberOfSpecialists(numberOfSpecialists)
-{
-    desiredNumberOfSpecialists = numberOfSpecialists.value;
-}
-
-function UpdateDesiredNumberOfDefenders(numberOfDefenders)
-{
-    desiredNumberOfDefenders = numberOfDefenders.value;
-}
-
-function UpdateDesiredNumberOfGuards(numberOfGuards)
-{
-    desiredNumberOfGuards = numberOfGuards.value;
-}
-
-function UpdateDesiredNumberOfCasters(numberOfCasters)
-{
-    desiredNumberOfCasters = numberOfCasters.value;
-}
-
 function UpdateDesiredTeamSize(teamSize)
 {
     desiredTeamSize = teamSize;

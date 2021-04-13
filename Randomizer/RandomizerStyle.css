@@ -30,7 +30,7 @@
 
 
   /*Operator Roster Area*/
-  #dummyCheckbox
+  .operatorCheckbox
   {
     display: flex;
 	flex-direction: column;
@@ -50,33 +50,33 @@
     flex-wrap: wrap;      
   }
 
-  #dummyCheckbox:not(:first-child) #UserOperatorLabel, 
-  #dummyCheckbox:not(:first-child) #UserOperatorCheckbox
+  .operatorCheckbox:not(:first-child) .UserOperatorLabel, 
+  .operatorCheckbox:not(:first-child) .UserOperatorCheckbox
   {
     display: none;
   }
 
-  #dummyCheckbox._selected {
+  .operatorCheckbox._selected {
     box-shadow: 0 0 2pt 1pt  #ffa500;
 	background-color: rgb(35, 35, 35);
   }
 
-  #dummyCheckbox img {
+  .operatorCheckbox img {
     width: 100%;
 	height: calc(100% - var(--nameplate-height));
 	opacity: 0.65;
   }
-  #dummyCheckbox:hover img {
+  .operatorCheckbox:hover img {
 	opacity: 0.8;
   }
-  #dummyCheckbox._selected img {
+  .operatorCheckbox._selected img {
 	opacity: 1;
   }
-  #dummyCheckbox:hover {
+  .operatorCheckbox:hover {
 	transform: scale(1.1);
 	background-color: rgb(25,25,25);
   }
-  #dummyCheckbox .name {
+  .operatorCheckbox .name {
 	height: var(--nameplate-height);
 	line-height: var(--nameplate-height);
 	text-align: center;

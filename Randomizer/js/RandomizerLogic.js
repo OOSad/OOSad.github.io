@@ -274,7 +274,8 @@ function CreateDummyCheckbox(operatorName)
     var dummyCheckbox = document.getElementById("dummyCheckbox");
 
     var dummyCheckboxClone = dummyCheckbox.cloneNode(true);
-
+	
+	dummyCheckboxClone.removeAttribute('id');
     dummyCheckboxClone.childNodes[0].textContent = operatorName;
     dummyCheckboxClone.childNodes[0].onclick = null;
     dummyCheckboxClone.childNodes[1].value = operatorName;

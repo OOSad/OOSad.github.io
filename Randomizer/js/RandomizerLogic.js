@@ -162,7 +162,7 @@ sortAlphabeticallyButton.onclick = function()
 rollAStageButton.onclick = function()
 {
 	// Filter stage data to only include main story stages
-	let availableStages = Object.values(stageData.stages).filter(x=>(x.stageType=='MAIN' || x.stageType=='SUB') && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL');
+	let availableStages = Object.values(stageData.stages).filter(x=>(x.stageType=='MAIN' || x.stageType=='SUB') && x.apCost && x.dailyStageDifficulty && x.difficulty == 'NORMAL' && x.levelId);
 	
 	// Filter out excluded acts
 	let filters = stagePoolsToFilterOut.map(x => 'main_'+stageMapping.indexOf(x))

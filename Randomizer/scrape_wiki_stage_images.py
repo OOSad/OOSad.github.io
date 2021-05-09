@@ -29,7 +29,6 @@ if __name__ == '__main__':
             json = r.json()
             for page in json['query']['pages'].values():
                 if 'categories' in page and page['categories']:
-                    # >1 category is a story/tutorial
                     stagemap.setdefault(page['title'],[]).extend([c['title'] for c in page['categories']])
             if 'continue' in json:
                 cont = f"&{urlencode(json['continue'])}"

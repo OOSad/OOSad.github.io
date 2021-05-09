@@ -172,8 +172,10 @@ rollAStageButton.onclick = function()
 	
     stageLabel.textContent = selectedStage;
 
-    var localPathToStagePicture = 'https://mrfz.fandom.com/wiki/Special:Redirect/file/' + selectedStage + '_map.png';
+    var wikiPathToStagePicture = 'https://mrfz.fandom.com/wiki/Special:Redirect/file/' + selectedStage + '_map.png';
+	var localPathToStagePicture = './StageIcons/' + selectedStage + '_map.png';
     stagePreviewImage.src = localPathToStagePicture;
+	stagePreviewImage.setAttribute('onerror', 'this.onerror=null;this.src="'+wikiPathToStagePicture+'"');
 }
 
 

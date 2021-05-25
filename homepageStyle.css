@@ -3,3 +3,14 @@ body
     background-color:#333333;
     color: #c8c8c8;
 }
+
+.catalog_post
+{
+    display: inline-block;
+    left:0;
+    right:0;
+    border: 1px solid;
+    padding-top: 20px;
+    text-align: center;
+}
+
